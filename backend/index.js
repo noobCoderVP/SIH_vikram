@@ -7,6 +7,10 @@ import dotenv from "dotenv";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 
+import openai from "openai";
+
+const { Configuration, OpenAIApi } = openai;
+
 // dirname
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -61,3 +65,23 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Successfully listening on port ${PORT}!`);
 });
+
+// Configure OpenAI API
+const openai_config = new OpenAIApi(new Configuration({
+    apiKey: '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' // Replace with your OpenAI API key
+}));
+
+app.post('/chat', async (req, res)=> {   
+    try {
+      const resp = await openai_config.createChatCompletion({
+        model: "gpt-3.5-turbo",
+          messages: [
+            { role: "user", content: req.body.question}
+          ]  
+      })           
+          
+      res.status(200).json({message: resp.data.choices[0].message.content})
+    } catch(e) {
+        res.status(400).json({message: e.message})
+    }
+  })
