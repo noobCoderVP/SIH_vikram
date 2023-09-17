@@ -1,11 +1,12 @@
 import express from "express";
-import session from "express-session";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import dotenv from "dotenv";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
+
+import userRouter from "./routes/user.js";
 
 // dirname
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -27,15 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-// session
-app.use(
-    session({
-        secret: "iamakey",
-        resave: false,
-        saveUninitialized: true,
-        cookie: { path: "/", maxAge: 1000 * 60 * 60 * 24 * 10 },
-    }),
-);
+app.use("/user", userRouter);
 
 app.get("/", (req, res) => {
     res.json({ hello: "world" });

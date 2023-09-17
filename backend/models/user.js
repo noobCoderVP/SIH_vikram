@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema(
         password: {
             type: String,
             required: true,
-            maxLength: 30,
+            maxLength: 100,
         },
         email: {
             type: String,
@@ -30,7 +30,7 @@ const userSchema = mongoose.Schema(
         occupation: String,
         dateOfBirth: {
             type: Date,
-            required: true,
+            // required: true,
         },
     },
     {

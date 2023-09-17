@@ -12,6 +12,6 @@ export async function connect() {
     );
 }
 
-export function disconnect() {
-    mongoose.disconnect();
+export async function disconnect() {
+    await mongoose.disconnect();
 }
