@@ -1,20 +1,24 @@
 import express from "express";
-import session from "express-session";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import dotenv from "dotenv";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
+import { createServer } from "http";
+import { Server } from "socket.io";
+
+import userRouter from "./routes/user.js";
 
 // dirname
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // dotenv
 dotenv.config();
-
-// express
-var app = express();
+// socket
+const app = express();
+const server = createServer(app);
+const io = new Server(server);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -27,18 +31,23 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-// session
-app.use(
-    session({
-        secret: "iamakey",
-        resave: false,
-        saveUninitialized: true,
-        cookie: { path: "/", maxAge: 1000 * 60 * 60 * 24 * 10 },
-    }),
-);
+app.use("/user", userRouter);
 
 app.get("/", (req, res) => {
-    res.json({ hello: "world" });
+    res.status(200).json({ hello: "world" });
+});
+
+io.on("connection", socket => {
+    console.log("Hello world");
+    // handling chats of users
+    socket.on("CHAT_MESSAGE", msg => {
+        socket.emit("CHAT_MESSAGE", msg);
+    });
+
+    // handling messages related to a case
+    socket.on("CASE_MESSAGE", msg => {
+        socket.emit("CASE_MESSAGE", msg);
+    });
 });
 
 // catch 404 and forward to error handler
@@ -58,6 +67,6 @@ app.use(function (err, req, res, next) {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Successfully listening on port ${PORT}!`);
 });
