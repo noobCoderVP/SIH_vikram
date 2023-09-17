@@ -11,36 +11,22 @@ const FaqSection = () => {
         <Accordion>
           <Accordion.Panel>
             <Accordion.Title>
-              What is Flowbite?
+            What is Online Legal Consulation?
             </Accordion.Title>
             <Accordion.Content>
               <p className="mb-2 text-gray-500 dark:text-gray-400">
                 <p>
-                  Flowbite is an open-source library of interactive components built on top of Tailwind CSS including buttons,
-                  dropdowns, modals, navbars, and more.
+                Online Legal consultation or online Lawyer consultation is a method to 
+                connect Users and Lawyers virtually. It is a convenient and easy way to get online Lawyer 
+                advice using NyayBazaar.
                 </p>
               </p>
-              <p className="text-gray-500 dark:text-gray-400">
-                <p>
-                  Check out this guide to learn how to
-                </p>
-                <a
-                  className="text-cyan-600 hover:underline dark:text-cyan-500"
-                  href="https://flowbite.com/docs/getting-started/introduction/"
-                >
-                  <p>
-                    get started
-                  </p>
-                </a>
-                <p>
-                  and start developing websites even faster with components on top of Tailwind CSS.
-                </p>
-              </p>
+              
             </Accordion.Content>
           </Accordion.Panel>
           <Accordion.Panel>
             <Accordion.Title>
-              Is there a Figma file available?
+              Are your Lawyers qualified?
             </Accordion.Title>
             <Accordion.Content>
               <p className="mb-2 text-gray-500 dark:text-gray-400">
@@ -69,7 +55,7 @@ const FaqSection = () => {
           </Accordion.Panel>
           <Accordion.Panel>
             <Accordion.Title>
-              What are the differences between Flowbite and Tailwind UI?
+              How do I get started?
             </Accordion.Title>
             <Accordion.Content>
               <p className="mb-2 text-gray-500 dark:text-gray-400" >
