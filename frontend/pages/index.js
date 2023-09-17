@@ -1,17 +1,25 @@
+
+import { Inter } from 'next/font/google'
 import Header from "@/components/Header";
-import Featured from "@/components/Featured";
-import {Product} from "@/models/Product";
-import {mongooseConnect} from "@/lib/mongoose";
-import NewProducts from "@/components/NewProducts";
+import Footer from '@/components/Footer';
+import SearchBox from '@/components/SearchBox';
+import FeedbackCarousel from '@/components/FeedbackCarousel';
+import ServicesSection from '@/components/ServicesSection';
+import FaqSection from '@/components/FaqSection';
+
 
 export default function HomePage({featuredProduct,newProducts}) {
   return (
     <div>
       <Header />
-      <Featured product={featuredProduct} />
-      <NewProducts products={newProducts} />
+      <SearchBox />
+      {/* Area for the Lawyer Cards or Results to Pop Up */}
+      <ServicesSection />
+      <FeedbackCarousel />
+      <FaqSection />
+      <Footer />
     </div>
-  );
+  )
 }
 
 export async function getServerSideProps() {

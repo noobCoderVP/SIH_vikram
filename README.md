@@ -1,8 +1,9 @@
 # Team Vikram SIH
 This is a full stack web application for searching and accessing the right legal services for you 
 
-Features:
-- Lawyer Consultation
-- Business Incorporation
-- Trademark Registration
-- NDAs and other Business Agreements
+Possible bases for design:
+- https://vakilsearch.com/
+- https://www.legalkart.com/
+
+Features To Add:
+- Auth with Google (Basic) -> transition to Auth with Aadhar if time permits?
