@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import LawyerCard from '../components/LawyerCard';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { Autocomplete } from '@mui/material';
+import TextField from '@mui/material/TextField';
 
 export default function LawyerSearch() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -30,11 +32,14 @@ export default function LawyerSearch() {
         <h2 className="text-3xl text-black text-center font-semibold mb-8">
           Find a Lawyer
         </h2>
-        <div className="flex items-center border-b border-white pb-2 mb-4">
-          <input
+        <div className="flex items-center border-white pb-2 mb-4">
+          <Autocomplete
+          freeSolo
             type="text"
-            className="w-full px-2 py-1 outline-none bg-transparent text-black placeholder-gray placeholder-opacity-50"
+            options={lawyerData}
+            className="w-full p-0 border-none bg-transparent text-black placeholder-gray placeholder-opacity-50"
             placeholder="Enter your search query"
+            renderInput={(params) => <TextField {...params} label="Enter your search query" />}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
