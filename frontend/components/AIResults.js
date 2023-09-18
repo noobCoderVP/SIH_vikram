@@ -23,7 +23,7 @@ export default function AIResults(searchQueryProps = '') {
     };
     return (
         <>
-            <div className="min-h-32 bg-gray-100 py-12">
+            <div className="col-span-4 mb-4 mr-4 ml-4 p-6 bg-gray-100 py-12">
                 <div className="container mx-auto">
                     <h2 className="text-black text-xl font-semibold">Results</h2>
                     <div className="flex items-center border-b border-white pb-2 mb-4">
