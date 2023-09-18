@@ -3,11 +3,11 @@ import { connect } from "./utils/connection.js";
 
 async function test() {
     await connect();
-    const userSchema = mongoose.Schema({
+    const testSchema = mongoose.Schema({
         name: String,
     });
-    const User = mongoose.model("users", userSchema);
-    const vaibhav = new User({ name: "Vaibhav" });
+    const Test = mongoose.model("test", testSchema);
+    const vaibhav = new Test({ name: "Vaibhav" });
     vaibhav.save();
 }
 
