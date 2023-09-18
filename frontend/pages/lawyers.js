@@ -39,11 +39,31 @@ export default function LawyerSearch() {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <button
-            className="ml-2 bg-white text-blue-500 px-4 py-2 rounded-md hover:bg-blue-100"
+            className="ml-2 bg-white text-blue-500 px-4 py-2 mr-2 rounded-md hover:bg-blue-100"
             onClick={handleSearch}
           >
             Search
           </button>
+
+          <div className="ml-auto flex space-x-2">
+          {/* Rating Dropdown */}
+          <select
+            className="bg-white text-blue-500 px-3 py-1 rounded-md hover:bg-blue-100"
+            onChange={(e) => handleSort('rating', e.target.value)}
+          >
+            <option value="high-to-low">Rating: High to Low</option>
+            <option value="low-to-high">Rating: Low to High</option>
+          </select>
+
+          {/* Price Dropdown */}
+          <select
+            className="bg-white text-blue-500 px-3 py-1 rounded-md hover:bg-blue-100"
+            onChange={(e) => handleSort('price', e.target.value)}
+          >
+            <option value="high-to-low">Price: High to Low</option>
+            <option value="low-to-high">Price: Low to High</option>
+          </select>
+        </div>
         </div>
 
         {/* Lawyer Card Grid */}
