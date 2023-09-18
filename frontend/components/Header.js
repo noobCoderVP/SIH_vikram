@@ -14,16 +14,19 @@ export default function Header() {
           </Link>
           <ul className="flex space-x-4">
             <li>
-              <Link href="/lawyers" className="text-black">Lawyers</Link>
+              <Link href="/lawyers" className="text-black hover:underline">Lawyers</Link>
             </li>
             <li>
-              <Link href="/property" className="text-black">Property</Link>
+              <Link href="/property" className="text-black hover:underline">Property</Link>
             </li>
             <li>
-              <Link href="/startup" className="text-black">Startup</Link>
+              <Link href="/startup" className="text-black hover:underline">Startup</Link>
             </li>
             <li>
-              <Link href="/documents" className="text-black">Documents</Link>
+              <Link href="/documents" className="text-black hover:underline">Documents</Link>
+            </li>
+            <li>
+              <Link href="/help" className="text-black hover:underline">Help</Link>
             </li>
             <li className="">
                <LoginButton />
