@@ -8,7 +8,6 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { createServer } from "http";
 import { Server } from "socket.io";
-import cors from 'cors';
 
 import userRouter from "./routes/user.js";
 import searchRouter from "./routes/search.js";
@@ -57,11 +56,6 @@ io.on("connection", socket => {
         socket.emit("CASE_MESSAGE", msg);
     });
 });
-
-// // catch 404 and forward to error handler
-// app.use(function (req, res, next) {
-//     next(createError(404));
-// });
 
 // error handler
 app.use(function (err, req, res, next) {

@@ -1,6 +1,39 @@
 import { React, useState } from 'react';
+import axios from 'axios';
 
-const SearchBox = () => {
+const SearchBox = ({ updateSearched , setAiResponse}) => {
+    const [inputText, setInputText] = useState(""); // State to store the input text
+
+    // Event handler to update inputText when the user types in the search box
+    const handleInputChange = (e) => {
+        setInputText(e.target.value);
+    };
+
+    // Event handler to submit the form and make the API call
+    const handleSubmit = async (e) => {
+        e.preventDefault(); // Prevent the default form submission behavior
+
+        try {
+        // Make the API call with Axios
+        const response = await axios.post('http://localhost:5000/api/ai', {
+            question: inputText,
+        });
+
+        // Handle the API response as needed
+        console.log('API Response:', response.data);
+        if (response.data) 
+        {// Trigger the updateSearched function in the parent component and set the AI Response
+            setAiResponse(response.data.message);
+            updateSearched(true);
+        }
+
+        
+        } catch (error) {
+        // Handle any errors that occur during the API call
+        console.error('API Error:', error);
+        }
+    };
+
     return (
         <div className="bg-gradient-to-r from-purple-500 to-indigo-600 py-16">
             <div className="container mx-auto text-center">
@@ -28,11 +61,11 @@ const SearchBox = () => {
                             dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Describe your problem and our AI will take care of the rest !" 
                                 rows="4" 
-                                required />
-                                {/* value={inputText} 
-                                onChange={handleInputChange} /> */}
+                                required
+                                value={inputText} 
+                                onChange={handleInputChange} />
 
-                            <button type="submit" class="right-2.5 text-white 
+                            <button onClick={handleSubmit} type="submit" class="right-2.5 text-white 
                             bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-blue-300 
                             font-medium rounded-lg text-sm px-4 py-2 ml-2 mb-auto mt-auto dark:bg-slate-600 dark:hover:bg-blue-700 
                             dark:focus:ring-blue-800">Search</button>
