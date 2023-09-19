@@ -47,12 +47,12 @@ export default function HomePage() {
             {/* Area for the Lawyer Cards or Results to Pop Up */}
 
             {searched ? (
-                <div className="grid grid-cols-6 bg-gray-100 ">
-                    <AIResults />
-                    <div className="col-span-2 mt-6 p-4 bg-gray-100">
-                        <LetterByLetterCard text={aiResponse} />
+                <div className="bg-gray-100 ">
+                    <LetterByLetterCard text={aiResponse} />
+                    {/* <div className="col-span-2 mt-6 p-4 bg-gray-100">
+                        <AIResults />
                         <TagSection chipData={chipData} />
-                    </div>
+                    </div> */}
                 </div>
             ) : (
                 <div></div>

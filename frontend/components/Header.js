@@ -18,7 +18,8 @@ export default function Header() {
         <header className="py-4 sticky top-0 z-10 bg-blue-100 border-b-2 border-gray-400">
             <div className="container mx-auto">
                 <nav className="flex justify-between items-center">
-                    <div className="text-blue-800 text-2xl font-semibold">
+                    <Image src={logo} width={30} height={30}></Image>
+                    <div className="text-blue-800 text-2xl font-semibold mr-auto ml-4">
                         NyayBazaar
                     </div>
                     <ul className="flex space-x-4">
