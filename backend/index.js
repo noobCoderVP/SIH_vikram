@@ -10,6 +10,7 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 
 import userRouter from "./routes/user.js";
+import searchRouter from "./routes/search.js";
 
 // dirname
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -34,6 +35,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/user", userRouter);
+app.use("/api", searchRouter);
 
 app.get("/", (req, res) => {
     res.status(200).json({ hello: "world" });
@@ -52,10 +54,10 @@ io.on("connection", socket => {
     });
 });
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    next(createError(404));
-});
+// // catch 404 and forward to error handler
+// app.use(function (req, res, next) {
+//     next(createError(404));
+// });
 
 // error handler
 app.use(function (err, req, res, next) {
