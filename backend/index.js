@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import cors from "cors";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import dotenv from "dotenv";
@@ -9,6 +10,9 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 
 import userRouter from "./routes/user.js";
+import searchRouter from "./routes/search.js";
+import aiRouter from "./routes/openai.js";
+import helpRouter from "./routes/help.js";
 
 // dirname
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -18,7 +22,11 @@ dotenv.config();
 // socket
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: "*",
+    },
+});
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -26,33 +34,32 @@ app.set("view engine", "ejs");
 
 // middlewares
 app.use(logger("dev"));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cors());
 
 app.use("/user", userRouter);
+app.use("/api", searchRouter);
+app.use("/help", helpRouter);
+app.use("/api", aiRouter);
 
 app.get("/", (req, res) => {
     res.status(200).json({ hello: "world" });
 });
 
 io.on("connection", socket => {
-    console.log("Hello world");
     // handling chats of users
     socket.on("CHAT_MESSAGE", msg => {
-        socket.emit("CHAT_MESSAGE", msg);
+        io.emit("CHAT_MESSAGE", msg);
     });
 
     // handling messages related to a case
     socket.on("CASE_MESSAGE", msg => {
-        socket.emit("CASE_MESSAGE", msg);
+        io.emit("CASE_MESSAGE", msg);
     });
-});
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    next(createError(404));
 });
 
 // error handler
