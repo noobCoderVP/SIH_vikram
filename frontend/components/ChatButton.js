@@ -1,7 +1,7 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Chatbox from "./Chatbox";
-const ChatButton = () => {
+const ChatButton = props => {
     const [isChatboxOpen, setIsChatboxOpen] = useState(false);
 
     const openChatbox = () => {
@@ -21,6 +21,7 @@ const ChatButton = () => {
             {isChatboxOpen && (
                 <Chatbox
                     style={{ zIndex: "5", position: "absolute", left: "0px" }}
+                    io={props.io}
                     onClose={closeChatbox}
                 />
             )}

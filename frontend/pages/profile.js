@@ -9,7 +9,7 @@ export default function Profile({ featuredProduct, newProducts }) {
             <Head>
                 <title>Profile</title>
             </Head>
-            <LawyerProfile />
+            <LawyerProfile io={io} />
         </div>
     );
 }

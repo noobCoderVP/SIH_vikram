@@ -31,6 +31,7 @@ const LoginPage = () => {
             if (response.data.status) {
                 toast(response.data.message);
                 localStorage.setItem("logged", true);
+                localStorage.setItem("username", loginData.username);
                 setTimeout(() => {
                     router.push("/");
                 }, 2000);

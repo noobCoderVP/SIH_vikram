@@ -20,7 +20,11 @@ dotenv.config();
 // socket
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: "*",
+    },
+});
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -42,15 +46,14 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", socket => {
-    console.log("Hello world");
     // handling chats of users
     socket.on("CHAT_MESSAGE", msg => {
-        socket.emit("CHAT_MESSAGE", msg);
+        io.emit("CHAT_MESSAGE", msg);
     });
 
     // handling messages related to a case
     socket.on("CASE_MESSAGE", msg => {
-        socket.emit("CASE_MESSAGE", msg);
+        io.emit("CASE_MESSAGE", msg);
     });
 });
 

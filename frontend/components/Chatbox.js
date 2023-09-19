@@ -1,14 +1,43 @@
 // Chatbox.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MessageList, Input } from "react-chat-elements";
 import "react-chat-elements/dist/main.css";
 import { Button } from "@mui/material";
 
-const Chatbox = ({ onClose }) => {
+const Chatbox = ({ onClose, io }) => {
     const [messages, setMessages] = useState([]);
     const [inputText, setInputText] = useState("");
+    const [socket, setSocket] = useState(null);
+    const [username, setUsername] = useState("unknown");
+
+    useEffect(() => {
+        let user = localStorage.getItem("username");
+        setUsername(user);
+        const socket = io("http://localhost:5000");
+
+        socket.on("CHAT_MESSAGE", msg => {
+            if (msg.username != user) {
+                const newMessage = {
+                    position: "left",
+                    type: "text",
+                    text: msg.message,
+                    date: new Date(),
+                };
+                setMessages([...messages, newMessage]);
+            }
+        });
+
+        setSocket(socket);
+        // Socket.IO event listeners and other socket logic can be added here.
+
+        return () => {
+            // Disconnect the socket when the component unmounts.
+            socket.disconnect();
+        };
+    }, []);
 
     const handleSendMessage = () => {
+        socket.emit("CHAT_MESSAGE", { username, message: inputText });
         if (inputText.trim() !== "") {
             const newMessage = {
                 position: "right",
