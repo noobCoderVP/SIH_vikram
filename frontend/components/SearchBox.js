@@ -1,30 +1,6 @@
 import { React, useState } from 'react';
 
 const SearchBox = () => {
-    const [inputText, setInputText] = useState(""); // State to store the input text
-
-    // Event handler to update inputText when the user types in the search box
-    const handleInputChange = (e) => {
-        setInputText(e.target.value);
-    };
-
-    // Event handler to submit the form and make the API call
-    const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent the default form submission behavior
-
-        // Make the API call with the input text
-        let res = await fetch('http://localhost:5000/api/ai', {
-            method: 'POST',
-            headers: {
-                "Content-Type": 'application/json'
-            },
-            body: JSON.stringify({
-                question: inputText
-            })
-        });
-
-        // Handle the API response as needed
-    };
     return (
         <div className="bg-gradient-to-r from-purple-500 to-indigo-600 py-16">
             <div className="container mx-auto text-center">
@@ -35,8 +11,8 @@ const SearchBox = () => {
                     Get legal advice and representation tailored to your needs.
                 </p>
                 <div className="max-w-xl mx-auto">
-                    <form onSubmit={handleSubmit}>
-                        <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                    <form>
+                        <label id="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                         <div class="relative flex">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                 <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -56,7 +32,7 @@ const SearchBox = () => {
                                 value={inputText} 
                                 onChange={handleInputChange} />
 
-                            <button type="submit" class="right-2.5 text-white 
+                            <button onClick={handleClick} type="submit" class="right-2.5 text-white 
                             bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-blue-300 
                             font-medium rounded-lg text-sm px-4 py-2 ml-2 mb-auto mt-auto dark:bg-slate-600 dark:hover:bg-blue-700 
                             dark:focus:ring-blue-800">Search</button>
