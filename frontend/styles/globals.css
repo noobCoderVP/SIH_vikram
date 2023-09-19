@@ -14,7 +14,7 @@
 }
 
 :is(body, .aside)::-webkit-scrollbar-track {
-    background: lightblue; /* color of the tracking area */
+    background: lightgoldenrodyellow; /* color of the tracking area */
 }
 
 :is(body, .aside)::-webkit-scrollbar-thumb {

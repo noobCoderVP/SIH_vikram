@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, Input, message, Checkbox, Select, Dropdown } from "antd";
+import { useRouter } from "next/router";
 
 import {
     options,
@@ -8,15 +9,29 @@ import {
     tierItems,
 } from "@/public/utlis/RegisterPageItems";
 import Link from "next/link";
+import axios from "axios";
 
 const Register = () => {
-    const [experience, setExperience] = useState("Select");
     const [tier, setTier] = useState("Select");
+    const router = useRouter();
 
     const onFinish = async values => {
         // For POST Request
-        message.success("Registered Successfully");
-        console.log(values);
+        try {
+            const response = await axios.post(
+                "http://localhost:5000/lawyer/register",
+                values,
+            );
+            if (response.data.status) {
+                message.success(response.data.message);
+                router.push("/lawyer/login");
+            } else {
+                message.error(response.data.message);
+            }
+        } catch (error) {
+            console.log(error);
+            message.error("Internal Server Error!");
+        }
     };
 
     const onFinishFailed = errorInfo => {
@@ -26,10 +41,6 @@ const Register = () => {
 
     function handleTierChange(value) {
         setTier(value);
-    }
-
-    function handleExperienceChange(value) {
-        setExperience(value);
     }
 
     return (
@@ -59,6 +70,27 @@ const Register = () => {
                 {/* Username */}
                 <div className="mt-4">
                     <label
+                        htmlFor="name"
+                        className="block mb-1 font-normal font-serif text-gray-500">
+                        Name
+                    </label>
+                    <Form.Item
+                        name="name"
+                        rules={[
+                            {
+                                required: true,
+                                message: "Please input your name!",
+                            },
+                        ]}>
+                        <Input
+                            className="leading-5 border-1 rounded-lg border-gray-300 placeholder-font"
+                            placeholder="full name"
+                            autoFocus
+                        />
+                    </Form.Item>
+                </div>
+                <div>
+                    <label
                         htmlFor="username"
                         className="block mb-1 font-normal font-serif text-gray-500">
                         Username
@@ -74,7 +106,6 @@ const Register = () => {
                         <Input
                             className="leading-5 border-1 rounded-lg border-gray-300 placeholder-font"
                             placeholder="Username"
-                            autoFocus
                         />
                     </Form.Item>
                 </div>
@@ -149,23 +180,16 @@ const Register = () => {
                                     message: "Please select your experience!",
                                 },
                             ]}>
-                            <Select
-                                placeholder="Select"
-                                onChange={handleExperienceChange}
-                                value={experience}>
-                                {experienceItems.map(item => (
-                                    <Select.Option
-                                        key={item.key}
-                                        value={item.label}>
-                                        {item.label}
-                                    </Select.Option>
-                                ))}
-                            </Select>
+                            <Input
+                                className="leading-5 border-1 rounded-lg placeholder-font border-gray-300"
+                                placeholder="Experience (yrs)"
+                                type="number"
+                            />
                         </Form.Item>
                     </div>
 
                     {/* Tier */}
-                    <div>
+                    <div className="ml-4">
                         <label
                             htmlFor="tier"
                             className="block mb-1 font-normal font-serif text-gray-500">
@@ -200,7 +224,7 @@ const Register = () => {
                     <label
                         htmlFor="password"
                         className="block mb-1 font-normal font-serif text-gray-500">
-                        Create Password
+                        Password
                     </label>
                     <Form.Item
                         name="password"
@@ -213,6 +237,55 @@ const Register = () => {
                         <Input.Password
                             className="rounded-lg focus:ring-2 focus:ring-blue-500"
                             placeholder="Password"
+                        />
+                    </Form.Item>
+                </div>
+
+                {/* About */}
+                {/* Tier and Experience */}
+                <div className="-mt-2 flex items-center justify-between mr-28">
+                    {/* Experience */}
+                    <div>
+                        <label
+                            htmlFor="experience"
+                            className="block mb-1 font-normal font-serif text-gray-500">
+                            Experience
+                        </label>
+                        <Form.Item
+                            name="experience"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please select your experience!",
+                                },
+                            ]}>
+                            <Input
+                                className="leading-5 border-1 rounded-lg placeholder-font border-gray-300"
+                                placeholder="Experience (yrs)"
+                                type="number"
+                            />
+                        </Form.Item>
+                    </div>
+                </div>
+
+                {/* About */}
+                <div>
+                    <label
+                        htmlFor="about"
+                        className="block mb-1 font-normal font-serif text-gray-500">
+                        About
+                    </label>
+                    <Form.Item
+                        name="about"
+                        rules={[
+                            {
+                                required: true,
+                                message: "Please tell us about yourself!",
+                            },
+                        ]}>
+                        <Input.TextArea
+                            rows={5}
+                            placeholder="What defines you?"
                         />
                     </Form.Item>
                 </div>
