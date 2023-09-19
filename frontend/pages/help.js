@@ -1,10 +1,45 @@
 // HelpSection.js
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Accordion } from "flowbite-react";
 import Head from "next/head";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 function HelpSection() {
+    const [formData, setFormData] = useState({
+        username: "",
+        query: "",
+    });
+    const router = useRouter();
+
+    useEffect(() => {
+        let user = localStorage.getItem("username");
+        setFormData({
+            ...formData,
+            username: user,
+        });
+    }, []);
+    const helpSubmitHandler = async e => {
+        e.preventDefault();
+        try {
+            const response = await axios.post(
+                "http://localhost:5000/help/",
+                formData,
+            );
+            if (response.data.status) {
+                toast(response.data.message);
+                router.push("/");
+            } else {
+                toast(response.data.message);
+            }
+        } catch (error) {
+            toast("Error, cannot submit help form!");
+        }
+    };
+
     return (
         <>
             <Head>
@@ -71,7 +106,10 @@ function HelpSection() {
                             Feel free to reach out to us. Fill out the form
                             below:
                         </p>
-                        <form>
+                        <ToastContainer />
+                        <form
+                            onSubmit={helpSubmitHandler}
+                            className="text-black">
                             <div className="mb-4">
                                 <label
                                     className="block text-gray-600 font-medium mb-2"
@@ -81,6 +119,12 @@ function HelpSection() {
                                 <textarea
                                     id="question"
                                     name="question"
+                                    onChange={e => {
+                                        setFormData({
+                                            ...formData,
+                                            query: e.target.value,
+                                        });
+                                    }}
                                     rows="4"
                                     className="w-full p-2 border border-gray-300 rounded"
                                     placeholder="Enter your question here..."></textarea>

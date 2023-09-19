@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const helpSchema = mongoose.Schema(
     {
-        user: {
+        username: {
             type: String,
             required: true,
         },
@@ -11,7 +11,10 @@ const helpSchema = mongoose.Schema(
             required: true,
         },
         image: String,
-        resolved: Boolean,
+        resolved: {
+            type: Boolean,
+            default: false,
+        },
     },
     { timestamps: true },
 );
