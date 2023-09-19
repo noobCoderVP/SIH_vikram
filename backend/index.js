@@ -7,9 +7,11 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { createServer } from "http";
 import { Server } from "socket.io";
+import cors from 'cors';
 
 import userRouter from "./routes/user.js";
 import searchRouter from "./routes/search.js";
+import aiRouter from "./routes/openai.js";
 
 // dirname
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -31,9 +33,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cors());
 
 app.use("/user", userRouter);
 app.use("/api", searchRouter);
+app.use("/api", aiRouter);
 
 app.get("/", (req, res) => {
     res.status(200).json({ hello: "world" });
