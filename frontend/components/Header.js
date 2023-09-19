@@ -16,12 +16,17 @@ export default function Header() {
         <header className="bg-white py-4">
             <div className="container mx-auto">
                 <nav className="flex justify-between items-center">
-                    <Link
-                        href="/"
-                        className="text-black text-2xl font-semibold">
+                    <div className="text-black text-2xl font-semibold">
                         NyayBazaar
-                    </Link>
+                    </div>
                     <ul className="flex space-x-4">
+                        <li>
+                            <Link
+                                href="/"
+                                className="text-black hover:underline">
+                                Home
+                            </Link>
+                        </li>
                         <li>
                             <Link
                                 href="/lawyers"
@@ -31,23 +36,16 @@ export default function Header() {
                         </li>
                         <li>
                             <Link
-                                href="/property"
+                                href="/profile"
                                 className="text-black hover:underline">
-                                Property
+                                Profile
                             </Link>
                         </li>
                         <li>
                             <Link
-                                href="/startup"
+                                href="/cases"
                                 className="text-black hover:underline">
-                                Startup
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href="/documents"
-                                className="text-black hover:underline">
-                                Documents
+                                Cases
                             </Link>
                         </li>
                         <li>
