@@ -17,7 +17,9 @@ export default function HomePage() {
         setSearched(newValue);
     };
 
-    const [aiResponse, setAiResponse] = useState("Please give a well-framed query for the legal services you need to our AI and it will find you a solution and the best providers on our website for the same ! ");
+    const [aiResponse, setAiResponse] = useState(
+        "Please give a well-framed query for the legal services you need to our AI and it will find you a solution and the best providers on our website for the same ! ",
+    );
     // const updateSearched = newValue => {
     //     setSearched(newValue);
     // };
@@ -37,7 +39,10 @@ export default function HomePage() {
             <Head>
                 <title>NyayBazaar</title>
             </Head>
-            <SearchBox updateSearched={updateSearched} setAiResponse={setAiResponse} />
+            <SearchBox
+                updateSearched={updateSearched}
+                setAiResponse={setAiResponse}
+            />
             {/* Area for the Lawyer Cards or Results to Pop Up */}
 
             {searched ? (
@@ -54,7 +59,6 @@ export default function HomePage() {
 
             <ServicesSection />
             <FeedbackCarousel />
-            <FaqSection />
         </div>
     );
 }
