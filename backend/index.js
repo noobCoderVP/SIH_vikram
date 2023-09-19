@@ -11,6 +11,7 @@ import { Server } from "socket.io";
 
 import userRouter from "./routes/user.js";
 import searchRouter from "./routes/search.js";
+import aiRouter from "./routes/openai.js";
 
 // dirname
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -33,9 +34,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cors());
 
 app.use("/user", userRouter);
 app.use("/api", searchRouter);
+app.use("/api", aiRouter);
 
 app.get("/", (req, res) => {
     res.status(200).json({ hello: "world" });
@@ -53,11 +56,6 @@ io.on("connection", socket => {
         socket.emit("CASE_MESSAGE", msg);
     });
 });
-
-// // catch 404 and forward to error handler
-// app.use(function (req, res, next) {
-//     next(createError(404));
-// });
 
 // error handler
 app.use(function (err, req, res, next) {
