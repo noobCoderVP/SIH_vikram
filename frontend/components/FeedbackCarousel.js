@@ -24,7 +24,6 @@ const FeedbackCarousel = () => {
                 <div>
                     <FeedbackCard {...feedbackData}></FeedbackCard>
                 </div>
-
                 <div className="flex justify-center items-center">
                     <FeedbackCard {...feedbackData}></FeedbackCard>
                 </div>

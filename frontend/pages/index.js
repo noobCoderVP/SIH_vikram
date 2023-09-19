@@ -9,6 +9,7 @@ import AIResults from "@/components/AIResults";
 import LetterByLetterCard from "@/components/LetterByLetterCard";
 import TagSection from "@/components/TagSection";
 import { useState } from "react";
+import LawyerRegistration from "@/components/LawyerRegistration";
 import Head from "next/head";
 
 export default function HomePage() {
@@ -56,9 +57,9 @@ export default function HomePage() {
             ) : (
                 <div></div>
             )}
-
             <ServicesSection />
             <FeedbackCarousel />
+            <LawyerRegistration />
         </div>
     );
 }

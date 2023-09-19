@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
+import logo from "../public/logo.jpeg";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
+import Image from "next/image";
 
 export default function Header() {
     const [mobileNavActive, setMobileNavActive] = useState(false);
@@ -13,10 +15,10 @@ export default function Header() {
     }, []);
 
     return (
-        <header className="bg-white py-4">
+        <header className="py-4 sticky top-0 z-10 bg-blue-100 border-b-2 border-gray-400">
             <div className="container mx-auto">
                 <nav className="flex justify-between items-center">
-                    <div className="text-black text-2xl font-semibold">
+                    <div className="text-blue-800 text-2xl font-semibold">
                         NyayBazaar
                     </div>
                     <ul className="flex space-x-4">

@@ -110,6 +110,9 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
+            <p className="text-center py-2 bg-blue-500 text-white">
+                &copy; NyayBazaar Private Limited, Mumbai, India 2023.
+            </p>
         </footer>
     );
 };
