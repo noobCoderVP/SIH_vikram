@@ -25,3 +25,30 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+/* Lawyer Login */
+.verifyEmailButton:hover{
+  background-color: #5cdbd3 !important ;
+}
+.verifyEmailButton{
+  background-color:#f0f0f0 ;
+}
+
+.placeholder-font {
+  font-family: "", sans-serif; /* Replace with your desired font */
+  font-size: 14px;
+  line-height: 1%;
+  /* Additional styling properties like color and font-size can be added here */
+}
+
+.checkboxText{
+  font-size: smaller !important;
+  font-weight:400 !important;
+}
+
+.agreementRegister{
+  font-size: x-small;
+  font-weight: 400;
+  margin-left: 7%;
+  margin-top: 3%;
+}
