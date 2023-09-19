@@ -13,6 +13,7 @@
   "author": "Vaibhav Patel",
   "license": "ISC",
   "dependencies": {
+    "aadhaar-validator": "^1.1.0",
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
@@ -22,8 +23,9 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.5.2",
     "morgan": "^1.10.0",
-    "openai": "^4.8.0",
-    "socket.io": "^4.7.2"
+    "sharp": "^0.32.6",
+    "socket.io": "^4.7.2",
+    "tesseract.js": "^4.1.2",
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
