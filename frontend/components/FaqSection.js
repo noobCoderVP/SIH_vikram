@@ -11,17 +11,17 @@ const FaqSection = () => {
         <Accordion>
           <Accordion.Panel>
             <Accordion.Title>
-            What is Online Legal Consulation?
+              What is Online Legal Consulation?
             </Accordion.Title>
             <Accordion.Content>
               <p className="mb-2 text-gray-500 dark:text-gray-400">
-                <p>
-                Online Legal consultation or online Lawyer consultation is a method to 
-                connect Users and Lawyers virtually. It is a convenient and easy way to get online Lawyer 
+
+                Online Legal consultation or online Lawyer consultation is a method to
+                connect Users and Lawyers virtually. It is a convenient and easy way to get online Lawyer
                 advice using NyayBazaar.
-                </p>
+
               </p>
-              
+
             </Accordion.Content>
           </Accordion.Panel>
           <Accordion.Panel>
@@ -30,14 +30,14 @@ const FaqSection = () => {
             </Accordion.Title>
             <Accordion.Content>
               <p className="mb-2 text-gray-500 dark:text-gray-400">
-                <p>
-                  Flowbite is first conceptualized and designed using the Figma software so everything you see in the library
-                  has a design equivalent in our Figma file.
-                </p>
+
+                Flowbite is first conceptualized and designed using the Figma software so everything you see in the library
+                has a design equivalent in our Figma file.
+
               </p>
             </Accordion.Content>
           </Accordion.Panel>
-          
+
         </Accordion>
       </div>
     </section>

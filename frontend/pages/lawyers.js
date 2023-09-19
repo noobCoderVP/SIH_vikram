@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import LawyerCard from '../components/LawyerCard';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { Autocomplete } from '@mui/material';
+import TextField from '@mui/material/TextField';
 
 export default function LawyerSearch() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -30,20 +32,43 @@ export default function LawyerSearch() {
         <h2 className="text-3xl text-black text-center font-semibold mb-8">
           Find a Lawyer
         </h2>
-        <div className="flex items-center border-b border-white pb-2 mb-4">
-          <input
+        <div className="flex items-center border-white pb-2 mb-4">
+          <Autocomplete
+          freeSolo
             type="text"
-            className="w-full px-2 py-1 outline-none bg-transparent text-black placeholder-gray placeholder-opacity-50"
+            options={lawyerData}
+            className="w-full p-0 border-none bg-transparent text-black placeholder-gray placeholder-opacity-50"
             placeholder="Enter your search query"
+            renderInput={(params) => <TextField {...params} label="Enter your search query" />}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <button
-            className="ml-2 bg-white text-blue-500 px-4 py-2 rounded-md hover:bg-blue-100"
+            className="ml-2 bg-white text-blue-500 px-4 py-2 mr-2 rounded-md hover:bg-blue-100"
             onClick={handleSearch}
           >
             Search
           </button>
+
+          <div className="ml-auto flex space-x-2">
+          {/* Rating Dropdown */}
+          <select
+            className="bg-white text-blue-500 px-3 py-1 rounded-md hover:bg-blue-100"
+            onChange={(e) => handleSort('rating', e.target.value)}
+          >
+            <option value="high-to-low">Rating: High to Low</option>
+            <option value="low-to-high">Rating: Low to High</option>
+          </select>
+
+          {/* Price Dropdown */}
+          <select
+            className="bg-white text-blue-500 px-3 py-1 rounded-md hover:bg-blue-100"
+            onChange={(e) => handleSort('price', e.target.value)}
+          >
+            <option value="high-to-low">Price: High to Low</option>
+            <option value="low-to-high">Price: Low to High</option>
+          </select>
+        </div>
         </div>
 
         {/* Lawyer Card Grid */}
