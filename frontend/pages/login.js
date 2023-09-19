@@ -1,9 +1,10 @@
 // LoginPage.js
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Head from "next/head";
 
 const LoginPage = () => {
     const [activeTab, setActiveTab] = useState("login");
@@ -28,8 +29,13 @@ const LoginPage = () => {
                 loginData,
             );
             if (response.data.status) {
-                router.push("/");
+                toast(response.data.message);
+                localStorage.setItem("logged", true);
+                setTimeout(() => {
+                    router.push("/");
+                }, 2000);
             } else {
+                toast(response.data.message);
             }
         } catch (error) {
             console.log(error);
@@ -47,8 +53,10 @@ const LoginPage = () => {
             );
             console.log(response);
             if (response.data.status) {
+                toast(response.data.message);
                 handleTabClick("login");
             } else {
+                toast(response.data.message);
             }
         } catch (error) {
             console.log(error);
@@ -58,7 +66,10 @@ const LoginPage = () => {
 
     return (
         <div>
-            <Header />
+            <Head>
+                <title>Get Started</title>
+            </Head>
+            <ToastContainer />
             <div className="min-h-screen flex items-center justify-center bg-gray-100">
                 <div className="bg-white p-8 rounded-lg shadow-lg">
                     <div className="mb-4">
@@ -99,13 +110,16 @@ const LoginPage = () => {
                     </div>
 
                     {activeTab === "login" && (
-                        <form onSubmit={handleLoginSubmit}>
+                        <form
+                            onSubmit={handleLoginSubmit}
+                            className="text-black">
                             <h2 className="text-black text-2xl font-semibold mb-4">
                                 Login
                             </h2>
                             <div className="mb-4">
                                 <input
                                     type="text"
+                                    minLength={5}
                                     placeholder="Username"
                                     className="w-full p-2 border border-gray-300 rounded"
                                     value={loginData.username}
@@ -230,7 +244,6 @@ const LoginPage = () => {
                     )}
                 </div>
             </div>
-            <Footer />
         </div>
     );
 };
