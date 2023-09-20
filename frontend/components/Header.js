@@ -5,13 +5,14 @@ import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import Image from "next/image";
 
-export default function Header() {
+const Header = props => {
     const [mobileNavActive, setMobileNavActive] = useState(false);
-    const [logged, setLogged] = useState(true);
+    const [logged, setLogged] = useState(false);
+    const [type, setType] = useState("");
 
     useEffect(() => {
-        console.log("Hello");
-        alert("hello");
+        if (localStorage.getItem("logged")) setLogged(true);
+        setType(localStorage.getItem("type"));
     }, []);
 
     return (
@@ -30,13 +31,15 @@ export default function Header() {
                                 Home
                             </Link>
                         </li>
-                        <li>
-                            <Link
-                                href="/lawyers"
-                                className="text-black hover:underline">
-                                Lawyers
-                            </Link>
-                        </li>
+                        {!(type == "lawyer") && (
+                            <li>
+                                <Link
+                                    href="/lawyers"
+                                    className="text-black hover:underline">
+                                    Lawyers
+                                </Link>
+                            </li>
+                        )}
                         <li>
                             <Link
                                 href="/profile"
@@ -59,12 +62,12 @@ export default function Header() {
                             </Link>
                         </li>
                         <li className="">
-                            {/* {logged ? <LogoutButton /> : <LoginButton />} */}
-                            <LoginButton />
+                            {logged ? <LogoutButton /> : <LoginButton />}
                         </li>
                     </ul>
                 </nav>
             </div>
         </header>
     );
-}
+};
+export default Header;

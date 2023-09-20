@@ -22,7 +22,10 @@ const Login = () => {
             );
             if (response.data.status) {
                 message.success(response.data.message);
-                router.push("/cases/");
+                localStorage.setItem("username", values.username);
+                localStorage.setItem("type", "lawyer");
+                localStorage.setItem("logged", true);
+                router.push("/");
             } else {
                 message.error(response.data.message);
             }

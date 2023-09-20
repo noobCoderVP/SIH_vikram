@@ -45,6 +45,7 @@ export default function LawyerSearch() {
             <Head>
                 <title>Lawyers</title>
             </Head>
+            <Header />
             <div className="min-h-screen bg-gray-100 py-12">
                 <div className="container mx-auto">
                     <h2 className="text-3xl text-black text-center font-semibold mb-8">

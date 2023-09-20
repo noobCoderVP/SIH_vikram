@@ -36,30 +36,33 @@ export default function HomePage() {
     ];
 
     return (
-        <div>
-            <Head>
-                <title>NyayBazaar</title>
-            </Head>
-            <SearchBox
-                updateSearched={updateSearched}
-                setAiResponse={setAiResponse}
-            />
-            {/* Area for the Lawyer Cards or Results to Pop Up */}
+        <>
+            <Header />
+            <div>
+                <Head>
+                    <title>NyayBazaar</title>
+                </Head>
+                <SearchBox
+                    updateSearched={updateSearched}
+                    setAiResponse={setAiResponse}
+                />
+                {/* Area for the Lawyer Cards or Results to Pop Up */}
 
-            {searched ? (
-                <div className="bg-gray-100 ">
-                    <LetterByLetterCard text={aiResponse} />
-                    {/* <div className="col-span-2 mt-6 p-4 bg-gray-100">
+                {searched ? (
+                    <div className="bg-gray-100 ">
+                        <LetterByLetterCard text={aiResponse} />
+                        {/* <div className="col-span-2 mt-6 p-4 bg-gray-100">
                         <AIResults />
                         <TagSection chipData={chipData} />
                     </div> */}
-                </div>
-            ) : (
-                <div></div>
-            )}
-            <ServicesSection />
-            <FeedbackCarousel />
-            <LawyerRegistration />
-        </div>
+                    </div>
+                ) : (
+                    <div></div>
+                )}
+                <ServicesSection />
+                <FeedbackCarousel />
+                <LawyerRegistration />
+            </div>
+        </>
     );
 }

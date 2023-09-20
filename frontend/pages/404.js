@@ -10,6 +10,7 @@ export default function NotFoundPage() {
             <Head>
                 <title>Not Found</title>
             </Head>
+            <Header />
             <div className="h-screen flex flex-col justify-center items-center text-black bg-gray-100">
                 <h1 className="text-4xl font-semibold mb-4">
                     404 - Page Not Found
