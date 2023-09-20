@@ -54,6 +54,15 @@ const Header = props => {
                                 Cases
                             </Link>
                         </li>
+                        {type == "lawyer" && (
+                            <li>
+                                <Link
+                                    href="/incentive"
+                                    className="text-black hover:underline">
+                                    Incentive
+                                </Link>
+                            </li>
+                        )}
                         <li>
                             <Link
                                 href="/help"

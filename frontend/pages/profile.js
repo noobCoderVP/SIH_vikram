@@ -11,7 +11,6 @@ export default function Profile({ featuredProduct, newProducts }) {
             <Head>
                 <title>Profile</title>
             </Head>
-            <LawyerProfile io={io} />
         </div>
     );
 }

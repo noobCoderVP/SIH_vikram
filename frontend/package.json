@@ -9,12 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "antd": "^5.9.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.9",
+    "@mui/x-data-grid": "^6.14.0",
     "@stripe/react-stripe-js": "^2.3.0",
     "@stripe/stripe-js": "^2.1.5",
+    "antd": "^5.9.1",
     "autoprefixer": "^10.4.15",
     "axios": "^1.5.0",
     "eslint": "8.49.0",

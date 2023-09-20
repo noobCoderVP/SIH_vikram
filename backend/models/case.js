@@ -7,6 +7,7 @@ const caseSchema = mongoose.Schema(
             required: true,
             unique: true,
         },
+        title: { type: String, required: true },
         client: {
             type: String,
             required: true,
