@@ -2,10 +2,12 @@
 import React from "react";
 import { Rating } from "flowbite-react";
 import LawyerTag from "./LawyerTag";
+import Link from "next/link";
 
 const LawyerCard = ({
     imageUrl,
     name,
+    username,
     rating,
     experience,
     renderButton = true,
@@ -75,9 +77,11 @@ const LawyerCard = ({
                     </div>
                     {renderButton ? (
                         <div>
-                            <button className="bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700">
+                            <Link
+                                className="bg-indigo-600 text-white py-2 px-2 rounded-lg hover:bg-indigo-700"
+                                href={`/lawyer/profile/${username}`}>
                                 Go to Lawyer's Page
-                            </button>
+                            </Link>
                         </div>
                     ) : (
                         <div></div>
