@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, Input, message, Checkbox, Select, Dropdown } from "antd";
 import { useRouter } from "next/router";
+import Header from "@/components/Header";
 
 import {
     options,
@@ -45,6 +46,7 @@ const Register = () => {
 
     return (
         <div className="bg-white">
+            <Header />
             <Form
                 name="basic"
                 className="m-auto w-full max-w-sm p-4 bg-white border border-gray-200 shadow sm:p-6 md:p-6"
