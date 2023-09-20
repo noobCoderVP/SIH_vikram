@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import { Button } from "@mui/material";
 import axios from "axios";
 
-const SearchBox = ({ updateSearched, setAiResponse }) => {
+const AIQueryBox = ({ updateSearched, setAiResponse }) => {
     const [inputText, setInputText] = useState(""); // State to store the input text
 
     // Event handler to update inputText when the user types in the search box
@@ -38,7 +38,7 @@ const SearchBox = ({ updateSearched, setAiResponse }) => {
     };
 
     return (
-        <div className="bg-gradient-to-r from-purple-500 to-indigo-600 py-8 pt-16">
+        <div className="bg-gradient-to-r from-red-950 to-blue-950 py-8 pt-16">
             <div className="container mx-auto text-center">
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4">
                     Find the Perfect Legal Service Provider
@@ -109,4 +109,4 @@ const SearchBox = ({ updateSearched, setAiResponse }) => {
     );
 };
 
-export default SearchBox;
+export default AIQueryBox;
