@@ -16,7 +16,7 @@ const Header = props => {
     }, []);
 
     return (
-        <header className="py-4 sticky top-0 z-10 bg-blue-100 border-b-2 border-gray-400">
+        <header className="py-4 sticky top-0 z-10 bg-stone-50 border-b-2 border-gray-400">
             <div className="container mx-auto">
                 <nav className="flex justify-between items-center">
                     <Image src={logo} width={30} height={30}></Image>
@@ -36,7 +36,7 @@ const Header = props => {
                                 <Link
                                     href="/lawyers"
                                     className="text-black hover:underline">
-                                    Lawyers
+                                    Legal Services 
                                 </Link>
                             </li>
                         )}
