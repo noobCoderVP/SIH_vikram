@@ -36,7 +36,7 @@ const Header = props => {
                                 <Link
                                     href="/lawyers"
                                     className="text-black hover:underline">
-                                    Lawyers
+                                    Legal Services 
                                 </Link>
                             </li>
                         )}
