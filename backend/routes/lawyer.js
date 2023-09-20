@@ -120,6 +120,6 @@ lawyerRouter.get("/profile/:username", async (req, res) => {
     } finally {
         await disconnect();
     }
-})
+});
 
 export default lawyerRouter;

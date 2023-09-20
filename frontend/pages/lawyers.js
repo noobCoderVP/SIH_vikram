@@ -3,10 +3,10 @@ import React, { useState , useEffect} from "react";
 import LawyerCard from "../components/LawyerCard";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import axios from "axios";
 import { Autocomplete } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Head from "next/head";
-import axios from 'axios';
 
 export default function LawyerSearch() {
     // Assuming you have a list of available tags in an array called 'availableTags'
@@ -45,22 +45,21 @@ export default function LawyerSearch() {
     ];
 
     const [lawyerData, setLawyerData] = useState([]); // Example data for LawyerCards
+
+    const fetchLawyerData = async () => {
+        try {
+            const response = await axios.get(
+                "http://localhost:5000/lawyer/all",
+            );
+            setLawyerData(response.data.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     useEffect(() => {
-        // Make the initial API request with no query parameters
-        const apiUrl = 'http://localhost:5000/api/search';
-    
-        axios
-          .get(apiUrl)
-          .then((response) => {
-            // Handle the API response here
-            console.log('API Response:', response.data);
-            setLawyerData(response.data.lawyers);
-          })
-          .catch((error) => {
-            // Handle any errors that occur during the API call
-            console.error('API Error:', error);
-          });
-      }, []); // Empty dependency array means this effect runs once when the component mounts
+        fetchLawyerData();
+    }, []);
     const handleSearch = () => {
 
         console.log(selectedTypeOfService);
