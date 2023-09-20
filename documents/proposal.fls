@@ -1,0 +1,4 @@
+PWD d:\0_SIH\documents
+INPUT C:\Users\AVITA\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
+INPUT d:\0_SIH\documents\proposal.tex
+OUTPUT proposal.log

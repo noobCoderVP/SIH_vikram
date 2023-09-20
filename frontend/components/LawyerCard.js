@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 import LawyerTag from "./LawyerTag";
 import Link from "next/link";
 
-const LawyerCard = ({ lawyer }) => {
+const LawyerCard = lawyer => {
     const {
         name,
         type_of_service_tag: typeOfServiceTag,
