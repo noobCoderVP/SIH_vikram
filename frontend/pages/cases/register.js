@@ -14,7 +14,9 @@ import {
     Checkbox,
     Select,
     Dropdown,
+    Upload,
 } from "antd";
+import { UploadOutlined } from '@ant-design/icons';
 import Header from "@/components/Header";
 import {
     options,
@@ -22,6 +24,7 @@ import {
     experienceItems,
     tierItems,
 } from "@/public/utlis/RegisterPageItems";
+import { uploadClientProps, uploadAgreementProps, uploadDegreeProps } from "@/public/utlis/CaseDocsUpload";
 
 const steps = ["Case details", "Documents", "Payment"];
 
@@ -73,8 +76,8 @@ export default function HorizontalNonLinearStepper() {
         const newActiveStep =
             isLastStep() && !allStepsCompleted()
                 ? // It's the last step, but not all steps have been completed,
-                  // find the first step that has been completed
-                  steps.findIndex((step, i) => !(i in completed))
+                // find the first step that has been completed
+                steps.findIndex((step, i) => !(i in completed))
                 : activeStep + 1;
         setActiveStep(newActiveStep);
     };
@@ -98,6 +101,7 @@ export default function HorizontalNonLinearStepper() {
         setActiveStep(0);
         setCompleted({});
     };
+
 
     return (
         <>
@@ -325,7 +329,103 @@ export default function HorizontalNonLinearStepper() {
                                     </div>
                                 </Form>
                             )}
-                            {activeStep == 1 && <h1>Step 2</h1>}
+                            {activeStep == 1 && (<div>
+                                {/* Step 2 Code */}
+                                <Form
+                                    name="basic"
+                                    className="mt-6 m-auto w-full max-w-sm p-4 bg-white border border-gray-200 shadow sm:p-6 md:p-6"
+                                    initialValues={{ remember: true }}
+                                    onFinish={onFinish}
+                                    onFinishFailed={onFinishFailed}
+                                    autoComplete="off"
+                                >
+                                    {/* Upload Documents */}
+                                    <div className="border-b-2 pb-3 flex justify-between items-center">
+                                        <h1 className="text-lg font-semibold text-gray-500">
+                                            Upload Documents
+                                        </h1>
+                                    </div>
+
+                                    {/* Degree */}
+                                    <div className="mt-4">
+                                        <label
+                                            htmlFor="uploadDegree"
+                                            className="block mb-1 font-normal font-serif text-gray-500"
+                                        >
+                                            Your Degree
+                                        </label>
+                                        <Form.Item
+                                            name="uploadDegree"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: "Please upload your degree!",
+                                                },
+                                            ]}
+                                        >
+                                            <Upload
+                                                name="uploadDegree" // Add name attribute
+                                                {...uploadDegreeProps}
+                                            >
+                                                <ButtonAnt icon={<UploadOutlined />}>Click to Upload</ButtonAnt>
+                                            </Upload>
+                                        </Form.Item>
+                                    </div>
+
+                                    {/* Case Legal Agreement */}
+                                    <div className="mt-4">
+                                        <label
+                                            htmlFor="uploadAgreement"
+                                            className="block mb-1 font-normal font-serif text-gray-500"
+                                        >
+                                            Case Legal Agreement
+                                        </label>
+                                        <Form.Item
+                                            name="uploadAgreement"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: "Please upload Agreement!",
+                                                },
+                                            ]}
+                                        >
+                                            <Upload
+                                                name="uploadAgreement" // Add name attribute
+                                                {...uploadAgreementProps}
+                                            >
+                                                <ButtonAnt icon={<UploadOutlined />}>Click to Upload</ButtonAnt>
+                                            </Upload>
+                                        </Form.Item>
+                                    </div>
+
+                                    {/* Client Docs */}
+                                    <div className="mt-4">
+                                        <label
+                                            htmlFor="uploadClient"
+                                            className="block mb-1 font-normal font-serif text-gray-500"
+                                        >
+                                            Client Documents
+                                        </label>
+                                        <Form.Item
+                                            name="uploadClient"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: "Please upload your documents!",
+                                                },
+                                            ]}
+                                        >
+                                            <Upload
+                                                name="uploadClient" // Add name attribute
+                                                {...uploadClientProps}
+                                            >
+                                                <ButtonAnt icon={<UploadOutlined />}>Click to Upload</ButtonAnt>
+                                            </Upload>
+                                        </Form.Item>
+                                    </div>
+                                </Form>
+
+                            </div>)}
                             {activeStep == 2 && <h1>Step 3</h1>}
                             <Box
                                 sx={{
@@ -355,7 +455,7 @@ export default function HorizontalNonLinearStepper() {
                                     ) : (
                                         <Button onClick={handleComplete}>
                                             {completedSteps() ===
-                                            totalSteps() - 1
+                                                totalSteps() - 1
                                                 ? "Finish"
                                                 : "Complete Step"}
                                         </Button>
