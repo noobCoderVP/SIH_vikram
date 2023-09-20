@@ -1,11 +1,11 @@
 import { Inter } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import SearchBox from "@/components/SearchBox";
+import AIQueryBox from "@/components/AIQueryBox";
 import FeedbackCarousel from "@/components/FeedbackCarousel";
 import ServicesSection from "@/components/ServicesSection";
 import FaqSection from "@/components/FaqSection";
-import AIResults from "@/components/AIResults";
+import SearchResults from "@/components/SearchResults";
 import LetterByLetterCard from "@/components/LetterByLetterCard";
 import TagSection from "@/components/TagSection";
 import { useState } from "react";
@@ -19,8 +19,9 @@ export default function HomePage() {
     };
 
     const [aiResponse, setAiResponse] = useState(
-        "Please give a well-framed query for the legal services you need to our AI and it will find you a solution and the best providers on our website for the same ! ",
-    );
+        // "Please give a well-framed query for the legal services you need to our AI and it will find you a solution and the best providers on our website for the same ! ",
+        "",
+        );
     // const updateSearched = newValue => {
     //     setSearched(newValue);
     // };
@@ -36,30 +37,33 @@ export default function HomePage() {
     ];
 
     return (
-        <div>
-            <Head>
-                <title>NyayBazaar</title>
-            </Head>
-            <SearchBox
-                updateSearched={updateSearched}
-                setAiResponse={setAiResponse}
-            />
-            {/* Area for the Lawyer Cards or Results to Pop Up */}
+        <>
+            <Header />
+            <div>
+                <Head>
+                    <title>NyayBazaar</title>
+                </Head>
+                <AIQueryBox
+                    updateSearched={updateSearched}
+                    setAiResponse={setAiResponse}
+                />
+                {/* Area for the Lawyer Cards or Results to Pop Up */}
 
-            {searched ? (
-                <div className="bg-gray-100 ">
-                    <LetterByLetterCard text={aiResponse} />
-                    {/* <div className="col-span-2 mt-6 p-4 bg-gray-100">
+                {searched ? (
+                    <div className="bg-gray-100 ">
+                        <LetterByLetterCard text={aiResponse} />
+                        {/* <div className="col-span-2 mt-6 p-4 bg-gray-100">
                         <AIResults />
                         <TagSection chipData={chipData} />
                     </div> */}
-                </div>
-            ) : (
-                <div></div>
-            )}
-            <ServicesSection />
-            <FeedbackCarousel />
-            <LawyerRegistration />
-        </div>
+                    </div>
+                ) : (
+                    <div></div>
+                )}
+                <ServicesSection />
+                <FeedbackCarousel />
+                <LawyerRegistration />
+            </div>
+        </>
     );
 }

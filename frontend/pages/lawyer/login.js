@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button, Form, Input, message, Checkbox, Select, Dropdown } from "antd";
 import Link from "next/link";
+import axios from "axios";
+import { useRouter } from "next/router";
 import {
     options,
     tagRender,
@@ -9,10 +11,28 @@ import {
 } from "@/public/utlis/RegisterPageItems";
 
 const Login = () => {
+    const router = useRouter();
     const onFinish = async values => {
         // For POST Request
-        message.success("Registered Successfully");
         console.log(values);
+        try {
+            const response = await axios.post(
+                "http://localhost:5000/lawyer/login/",
+                values,
+            );
+            if (response.data.status) {
+                message.success(response.data.message);
+                localStorage.setItem("username", values.username);
+                localStorage.setItem("type", "lawyer");
+                localStorage.setItem("logged", true);
+                router.push("/");
+            } else {
+                message.error(response.data.message);
+            }
+        } catch (error) {
+            console.log(error);
+            message.error("Internal Server Error!");
+        }
     };
 
     const onFinishFailed = errorInfo => {

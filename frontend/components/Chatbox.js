@@ -5,7 +5,20 @@ import "react-chat-elements/dist/main.css";
 import { Button } from "@mui/material";
 
 const Chatbox = ({ onClose, io }) => {
-    const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState([
+        {
+            position: "right",
+            type: "text",
+            text: "Can you help me out with my case?",
+            date: new Date(2023, 8, 18, 22, 13, 30),
+        },
+        {
+            position: "left",
+            type: "text",
+            text: "Yes sure, what is your case related to?",
+            date: new Date(2023, 8, 19, 22, 13, 30),
+        },
+    ]);
     const [inputText, setInputText] = useState("");
     const [socket, setSocket] = useState(null);
     const [username, setUsername] = useState("unknown");

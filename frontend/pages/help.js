@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Header from "@/components/Header";
 
 function HelpSection() {
     const [formData, setFormData] = useState({
@@ -45,6 +46,7 @@ function HelpSection() {
             <Head>
                 <title>Help</title>
             </Head>
+            <Header />
             <section className="py-10 bg-gray-100">
                 <div className="container mx-auto">
                     <div className="bg-white p-4 mb-10 rounded-lg shadow-lg">

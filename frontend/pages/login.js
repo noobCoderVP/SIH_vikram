@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Head from "next/head";
+import Header from "@/components/Header";
 
 const LoginPage = () => {
     const [activeTab, setActiveTab] = useState("login");
@@ -32,6 +33,7 @@ const LoginPage = () => {
                 toast(response.data.message);
                 localStorage.setItem("logged", true);
                 localStorage.setItem("username", loginData.username);
+                localStorage.setItem("type", "client");
                 setTimeout(() => {
                     router.push("/");
                 }, 2000);
@@ -62,7 +64,6 @@ const LoginPage = () => {
         } catch (error) {
             console.log(error);
         }
-        console.log("Registering with:", registrationData);
     };
 
     return (
@@ -70,6 +71,7 @@ const LoginPage = () => {
             <Head>
                 <title>Get Started</title>
             </Head>
+            <Header />
             <ToastContainer />
             <div className="min-h-screen flex items-center justify-center bg-gray-100">
                 <div className="bg-white p-8 rounded-lg shadow-lg">

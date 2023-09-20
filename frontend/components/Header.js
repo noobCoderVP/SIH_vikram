@@ -5,17 +5,18 @@ import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import Image from "next/image";
 
-export default function Header() {
+const Header = props => {
     const [mobileNavActive, setMobileNavActive] = useState(false);
-    const [logged, setLogged] = useState(true);
+    const [logged, setLogged] = useState(false);
+    const [type, setType] = useState("");
 
     useEffect(() => {
-        console.log("Hello");
-        alert("hello");
+        if (localStorage.getItem("logged")) setLogged(true);
+        setType(localStorage.getItem("type"));
     }, []);
 
     return (
-        <header className="py-4 sticky top-0 z-10 bg-blue-100 border-b-2 border-gray-400">
+        <header className="py-4 sticky top-0 z-10 bg-stone-50 border-b-2 border-gray-400">
             <div className="container mx-auto">
                 <nav className="flex justify-between items-center">
                     <Image src={logo} width={30} height={30}></Image>
@@ -30,20 +31,22 @@ export default function Header() {
                                 Home
                             </Link>
                         </li>
-                        <li>
-                            <Link
-                                href="/lawyers"
-                                className="text-black hover:underline">
-                                Lawyers
-                            </Link>
-                        </li>
-                        <li>
+                        {!(type == "lawyer") && (
+                            <li>
+                                <Link
+                                    href="/lawyers"
+                                    className="text-black hover:underline">
+                                    Legal Services 
+                                </Link>
+                            </li>
+                        )}
+                        {/* <li>
                             <Link
                                 href="/profile"
                                 className="text-black hover:underline">
                                 Profile
                             </Link>
-                        </li>
+                        </li> */}
                         <li>
                             <Link
                                 href="/cases"
@@ -51,6 +54,15 @@ export default function Header() {
                                 Cases
                             </Link>
                         </li>
+                        {type == "lawyer" && (
+                            <li>
+                                <Link
+                                    href="/incentive"
+                                    className="text-black hover:underline">
+                                    Incentive
+                                </Link>
+                            </li>
+                        )}
                         <li>
                             <Link
                                 href="/help"
@@ -59,12 +71,12 @@ export default function Header() {
                             </Link>
                         </li>
                         <li className="">
-                            {/* {logged ? <LogoutButton /> : <LoginButton />} */}
-                            <LoginButton />
+                            {logged ? <LogoutButton /> : <LoginButton />}
                         </li>
                     </ul>
                 </nav>
             </div>
         </header>
     );
-}
+};
+export default Header;
