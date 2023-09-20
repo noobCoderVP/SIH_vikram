@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
-import logo from "../public/logo.jpeg";
+import logo from "../public/logo.png";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import Image from "next/image";
@@ -19,9 +19,13 @@ const Header = props => {
         <header className="py-4 sticky top-0 z-10 bg-stone-50 border-b-2 border-gray-400">
             <div className="container mx-auto">
                 <nav className="flex justify-between items-center">
-                    <Image src={logo} width={30} height={30}></Image>
+                    <Image src={logo} width={40} height={40}></Image>
                     <div className="text-blue-800 text-2xl font-semibold mr-auto ml-4">
-                        NyayBazaar
+                        <Link
+                            href="/"
+                            className="hover:underline">
+                            NyayBazaar
+                        </Link>
                     </div>
                     <ul className="flex space-x-4">
                         <li>
@@ -68,6 +72,13 @@ const Header = props => {
                                 href="/help"
                                 className="text-black hover:underline">
                                 Help
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                href="/newsletter"
+                                className="text-black hover:underline">
+                                Newsletter
                             </Link>
                         </li>
                         <li className="">
