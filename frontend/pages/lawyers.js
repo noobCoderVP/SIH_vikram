@@ -1,8 +1,9 @@
 // src/SearchPage.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LawyerCard from "../components/LawyerCard";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import axios from "axios";
 import { Autocomplete } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Head from "next/head";
@@ -12,6 +13,20 @@ export default function LawyerSearch() {
 
     const [lawyerData, setLawyerData] = useState([]); // Example data for LawyerCards
 
+    const fetchLawyerData = async () => {
+        try {
+            const response = await axios.get(
+                "http://localhost:5000/lawyer/all",
+            );
+            setLawyerData(response.data.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchLawyerData();
+    }, []);
     const handleSearch = () => {
         // In a real application, you would fetch lawyer data based on the search query.
         // For this example, let's use mock data.
@@ -37,7 +52,7 @@ export default function LawyerSearch() {
             // Add more lawyer data as needed
         ];
 
-        setLawyerData(mockLawyerData);
+        setLawyerData(lawyerData);
     };
 
     return (
@@ -55,7 +70,7 @@ export default function LawyerSearch() {
                         <Autocomplete
                             freeSolo
                             type="text"
-                            options={lawyerData}
+                            options={lawyerData.map(e => e.name)}
                             className="w-full p-0 border-none bg-transparent text-black placeholder-gray placeholder-opacity-50"
                             placeholder="Enter your search query"
                             renderInput={params => (
@@ -106,9 +121,20 @@ export default function LawyerSearch() {
 
                     {/* Lawyer Card Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {lawyerData.map(lawyer => (
-                            <LawyerCard key={lawyer.id} {...lawyer} />
-                        ))}
+                        {lawyerData.map(lawyer => {
+                            if (lawyer.tags)
+                                return (
+                                    <LawyerCard
+                                        username={lawyer.username}
+                                        key={lawyer.id}
+                                        name={lawyer.name}
+                                        rating={lawyer.rating}
+                                        experience={lawyer.experience}
+                                        tier={lawyer.tier}
+                                        tags={lawyer.tags}
+                                    />
+                                );
+                        })}
                     </div>
 
                     {/* Pagination (You can replace this with a pagination library) */}

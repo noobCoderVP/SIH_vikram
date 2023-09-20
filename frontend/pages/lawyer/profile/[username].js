@@ -16,7 +16,7 @@ export default function Profile({ featuredProduct, newProducts }) {
     const fetchDetails = async username => {
         try {
             const response = await axios.get(
-                `http://localhost:5000/lawyer/${username}`,
+                `http://localhost:5000/lawyer/profile/${username}`,
             );
             if (response.data.status) {
                 setDetails(response.data.data);
