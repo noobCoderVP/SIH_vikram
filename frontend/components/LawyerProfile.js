@@ -7,6 +7,8 @@ import { Rating } from "flowbite-react";
 import ChatButton from "./ChatButton";
 
 const LawyerProfile = props => {
+    const { name, about, experience, rating, tags, tier } = props.details;
+    console.log(tags);
     const feedbackData = {
         name: "John Doe",
         rating: 4, // You can set the rating from 0 to 5
@@ -19,22 +21,8 @@ const LawyerProfile = props => {
                 <div className="flex flex-col lg:flex-row justify-between">
                     {/* Left Column */}
                     <div className="text-black lg:w-2/3 pr-4">
-                        <h1 className="text-3xl font-semibold mb-4">
-                            Lawyer Name
-                        </h1>
-                        <p className="mb-4">
-                            It is a long established fact that a reader will be
-                            distracted by the readable content of a page when
-                            looking at its layout. The point of using Lorem
-                            Ipsum is that it has a more-or-less normal
-                            distribution of letters, as opposed to using
-                            'Content here, content here', making it look like
-                            readable English. Many desktop publishing packages
-                            and web page editors now use Lorem Ipsum as their
-                            default model text, and a search for 'lorem ipsum'
-                            will uncover many web sites still in their infancy.
-                            Various ve
-                        </p>
+                        <h1 className="text-3xl font-semibold mb-4">{name}</h1>
+                        <p className="mb-4">{about}</p>
                         <div className="flex flex-row">
                             <p className="text-xl text-black font-semibold mr-4">
                                 {" "}
@@ -47,7 +35,7 @@ const LawyerProfile = props => {
                             </p>
                             <ChatButton io={props.io} />
                         </div>
-                        <div className="mt-4 mb-6">
+                        {/* <div className="mt-4 mb-6">
                             <h2 className="text-xl font-semibold mb-4">
                                 Specialistions
                             </h2>
@@ -64,7 +52,7 @@ const LawyerProfile = props => {
                                 for 'lorem ipsum' will uncover many web sites
                                 still in their infancy. Various ve
                             </p>
-                        </div>
+                        </div> */}
                         {/* Feedback Section */}
                         <div className="mb-6">
                             <h2 className="text-xl font-semibold mb-4">
@@ -102,16 +90,12 @@ const LawyerProfile = props => {
 
                     {/* Right Column */}
                     <div className="lg:w-1/3">
-                        <LawyerCard renderButton={false}></LawyerCard>
-
-                        {/* Placeholder Section */}
-                        <div className="mt-8 text-black">
-                            {/* Add content for the placeholder section */}
-                            <h1 className="text-2xl text-center font-semibold">
-                                Case History
-                            </h1>
-                            <p>dbodbidiwdin</p>
-                        </div>
+                        <LawyerCard
+                            renderButton={false}
+                            tags={tags}
+                            tier={tier}
+                            rating={rating}
+                            experience={experience}></LawyerCard>
                     </div>
                 </div>
             </div>

@@ -65,4 +65,33 @@ lawyerRouter.post("/login", async (req, res) => {
     });
 });
 
+lawyerRouter.get("/:username", async (req, res) => {
+    try {
+        await connect();
+        const username = req.params.username;
+        const u = await lawyer.findOne({ username });
+        if (u) {
+            res.status(200).json({
+                message: "Lawyer data retrieved!",
+                status: true,
+                data: u,
+            });
+        } else {
+            res.status(200).json({
+                message: "Lawyer does not exist!",
+                status: false,
+                data: {},
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Internal Server Error",
+            status: false,
+        });
+    } finally {
+        await disconnect();
+    }
+});
+
 export default lawyerRouter;
