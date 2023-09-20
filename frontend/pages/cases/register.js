@@ -15,9 +15,9 @@ import {
     Select,
     Dropdown,
     Upload,
-    Space
+    Space,
 } from "antd";
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined } from "@ant-design/icons";
 import Header from "@/components/Header";
 import {
     options,
@@ -25,7 +25,11 @@ import {
     experienceItems,
     tierItems,
 } from "@/public/utlis/RegisterPageItems";
-import { uploadClientProps, uploadAgreementProps, uploadDegreeProps } from "@/public/utlis/CaseDocsUpload";
+import {
+    uploadClientProps,
+    uploadAgreementProps,
+    uploadDegreeProps,
+} from "@/public/utlis/CaseDocsUpload";
 
 const steps = ["Case details", "Documents", "Payment"];
 
@@ -77,8 +81,8 @@ export default function HorizontalNonLinearStepper() {
         const newActiveStep =
             isLastStep() && !allStepsCompleted()
                 ? // It's the last step, but not all steps have been completed,
-                // find the first step that has been completed
-                steps.findIndex((step, i) => !(i in completed))
+                  // find the first step that has been completed
+                  steps.findIndex((step, i) => !(i in completed))
                 : activeStep + 1;
         setActiveStep(newActiveStep);
     };
@@ -102,7 +106,6 @@ export default function HorizontalNonLinearStepper() {
         setActiveStep(0);
         setCompleted({});
     };
-
 
     return (
         <>
@@ -198,6 +201,30 @@ export default function HorizontalNonLinearStepper() {
                                             <Input
                                                 className="leading-5 border-1 rounded-lg border-gray-300 placeholder-font"
                                                 placeholder="Username"
+                                            />
+                                        </Form.Item>
+                                    </div>
+
+                                    {/* Title */}
+                                    <div className="mt-4">
+                                        <label
+                                            htmlFor="title"
+                                            className="block mb-1 font-normal font-serif text-gray-500">
+                                            Title
+                                        </label>
+                                        <Form.Item
+                                            name="title"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message:
+                                                        "Please input the case title!",
+                                                },
+                                            ]}>
+                                            <Input
+                                                className="leading-5 border-1 rounded-lg border-gray-300 placeholder-font"
+                                                placeholder="Case title"
+                                                autoFocus
                                             />
                                         </Form.Item>
                                     </div>
@@ -330,166 +357,172 @@ export default function HorizontalNonLinearStepper() {
                                     </div>
                                 </Form>
                             )}
-                            {activeStep == 1 && (<div>
-                                {/* Step 2 Code */}
-                                <Form
-                                    name="basic"
-                                    className="mt-6 m-auto w-full max-w-sm p-4 bg-white border border-gray-200 shadow sm:p-6 md:p-6"
-                                    initialValues={{ remember: true }}
-                                    onFinish={onFinish}
-                                    onFinishFailed={onFinishFailed}
-                                    autoComplete="off"
-                                >
-                                    {/* Upload Documents */}
-                                    <div className="border-b-2 pb-3 flex justify-between items-center">
-                                        <h1 className="text-lg font-semibold text-gray-500">
-                                            Upload Documents
-                                        </h1>
-                                    </div>
+                            {activeStep == 1 && (
+                                <div>
+                                    {/* Step 2 Code */}
+                                    <Form
+                                        name="basic"
+                                        className="mt-6 m-auto w-full max-w-sm p-4 bg-white border border-gray-200 shadow sm:p-6 md:p-6"
+                                        initialValues={{ remember: true }}
+                                        onFinish={onFinish}
+                                        onFinishFailed={onFinishFailed}
+                                        autoComplete="off">
+                                        {/* Upload Documents */}
+                                        <div className="border-b-2 pb-3 flex justify-between items-center">
+                                            <h1 className="text-lg font-semibold text-gray-500">
+                                                Upload Documents
+                                            </h1>
+                                        </div>
 
-                                    {/* Degree */}
-                                    <div className="mt-4">
-                                        <label
-                                            htmlFor="uploadDegree"
-                                            className="block mb-1 font-normal font-serif text-gray-500"
-                                        >
-                                            Your Degree
-                                        </label>
-                                        <Form.Item
-                                            name="uploadDegree"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "Please upload your degree!",
-                                                },
-                                            ]}
-                                        >
-                                            <Upload
-                                                name="uploadDegree" // Add name attribute
-                                                {...uploadDegreeProps}
-                                            >
-                                                <ButtonAnt icon={<UploadOutlined />}>Click to Upload</ButtonAnt>
-                                            </Upload>
-                                        </Form.Item>
-                                    </div>
+                                        {/* Degree */}
+                                        <div className="mt-4">
+                                            <label
+                                                htmlFor="uploadDegree"
+                                                className="block mb-1 font-normal font-serif text-gray-500">
+                                                Your Degree
+                                            </label>
+                                            <Form.Item
+                                                name="uploadDegree"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message:
+                                                            "Please upload your degree!",
+                                                    },
+                                                ]}>
+                                                <Upload
+                                                    name="uploadDegree" // Add name attribute
+                                                    {...uploadDegreeProps}>
+                                                    <ButtonAnt
+                                                        icon={
+                                                            <UploadOutlined />
+                                                        }>
+                                                        Click to Upload
+                                                    </ButtonAnt>
+                                                </Upload>
+                                            </Form.Item>
+                                        </div>
 
-                                    {/* Case Legal Agreement */}
-                                    <div className="mt-4">
-                                        <label
-                                            htmlFor="uploadAgreement"
-                                            className="block mb-1 font-normal font-serif text-gray-500"
-                                        >
-                                            Case Legal Agreement
-                                        </label>
-                                        <Form.Item
-                                            name="uploadAgreement"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "Please upload Agreement!",
-                                                },
-                                            ]}
-                                        >
-                                            <Upload
-                                                name="uploadAgreement" // Add name attribute
-                                                {...uploadAgreementProps}
-                                            >
-                                                <ButtonAnt icon={<UploadOutlined />}>Click to Upload</ButtonAnt>
-                                            </Upload>
-                                        </Form.Item>
-                                    </div>
+                                        {/* Case Legal Agreement */}
+                                        <div className="mt-4">
+                                            <label
+                                                htmlFor="uploadAgreement"
+                                                className="block mb-1 font-normal font-serif text-gray-500">
+                                                Case Legal Agreement
+                                            </label>
+                                            <Form.Item
+                                                name="uploadAgreement"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message:
+                                                            "Please upload Agreement!",
+                                                    },
+                                                ]}>
+                                                <Upload
+                                                    name="uploadAgreement" // Add name attribute
+                                                    {...uploadAgreementProps}>
+                                                    <ButtonAnt
+                                                        icon={
+                                                            <UploadOutlined />
+                                                        }>
+                                                        Click to Upload
+                                                    </ButtonAnt>
+                                                </Upload>
+                                            </Form.Item>
+                                        </div>
 
-                                    {/* Client Docs */}
-                                    <div className="mt-4">
-                                        <label
-                                            htmlFor="uploadClient"
-                                            className="block mb-1 font-normal font-serif text-gray-500"
-                                        >
-                                            Client Documents
-                                        </label>
-                                        <Form.Item
-                                            name="uploadClient"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "Please upload your documents!",
-                                                },
-                                            ]}
-                                        >
-                                            <Upload
-                                                name="uploadClient" // Add name attribute
-                                                {...uploadClientProps}
-                                            >
-                                                <ButtonAnt icon={<UploadOutlined />}>Click to Upload</ButtonAnt>
-                                            </Upload>
-                                        </Form.Item>
-                                    </div>
-                                </Form>
+                                        {/* Client Docs */}
+                                        <div className="mt-4">
+                                            <label
+                                                htmlFor="uploadClient"
+                                                className="block mb-1 font-normal font-serif text-gray-500">
+                                                Client Documents
+                                            </label>
+                                            <Form.Item
+                                                name="uploadClient"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message:
+                                                            "Please upload your documents!",
+                                                    },
+                                                ]}>
+                                                <Upload
+                                                    name="uploadClient" // Add name attribute
+                                                    {...uploadClientProps}>
+                                                    <ButtonAnt
+                                                        icon={
+                                                            <UploadOutlined />
+                                                        }>
+                                                        Click to Upload
+                                                    </ButtonAnt>
+                                                </Upload>
+                                            </Form.Item>
+                                        </div>
+                                    </Form>
+                                </div>
+                            )}
+                            {activeStep == 2 && (
+                                <div>
+                                    {/* Step3 - Payments starts here  */}
 
-                            </div>)}
-                            {activeStep == 2 && (<div>
-                                {/* Step3 - Payments starts here  */}
+                                    <Form
+                                        name="payments"
+                                        className="mt-6 m-auto w-full max-w-sm p-4 bg-white border border-gray-200 shadow sm:p-6 md:p-6"
+                                        initialValues={{ remember: true }}
+                                        onFinish={onFinish}
+                                        onFinishFailed={onFinishFailed}
+                                        autoComplete="off">
+                                        {/* Payments */}
+                                        <div className="border-b-2 pb-3 flex justify-between items-center">
+                                            <h1 className="text-lg font-semibold text-gray-500">
+                                                Payment
+                                            </h1>
+                                        </div>
 
-                                <Form
-                                    name="payments"
-                                    className="mt-6 m-auto w-full max-w-sm p-4 bg-white border border-gray-200 shadow sm:p-6 md:p-6"
-                                    initialValues={{ remember: true }}
-                                    onFinish={onFinish}
-                                    onFinishFailed={onFinishFailed}
-                                    autoComplete="off"
-                                >
-                                    {/* Payments */}
-                                    <div className="border-b-2 pb-3 flex justify-between items-center">
-                                        <h1 className="text-lg font-semibold text-gray-500">
-                                            Payment
-                                        </h1>
-                                    </div>
+                                        {/* Amount */}
+                                        <div className="mt-4">
+                                            <label
+                                                htmlFor="Amount"
+                                                className="block mb-1 font-normal font-serif text-gray-500">
+                                                Amount
+                                            </label>
+                                            <Form.Item
+                                                name="Amount"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message:
+                                                            "Please enter amount!",
+                                                    },
+                                                ]}>
+                                                <InputNumber></InputNumber>
+                                            </Form.Item>
+                                        </div>
 
-                                    {/* Amount */}
-                                    <div className="mt-4">
-                                        <label
-                                            htmlFor="Amount"
-                                            className="block mb-1 font-normal font-serif text-gray-500"
-                                        >
-                                            Amount
-                                        </label>
-                                        <Form.Item
-                                            name="Amount"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "Please enter amount!",
-                                                },
-                                            ]}
-                                        >
-                                           <InputNumber></InputNumber>
-                                        </Form.Item>
-                                    </div>
-
-                                    {/* Due Date */}
-                                    <div className="mt-4">
-                                        <label
-                                            htmlFor="dueDate"
-                                            className="block mb-1 font-normal font-serif text-gray-500"
-                                        >
-                                            Due Date
-                                        </label>
-                                        <Form.Item
-                                            name="dueDate"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "Please select due date!",
-                                                },
-                                            ]}
-                                        >
-                                           <DatePicker />
-                                        </Form.Item>
-                                    </div>
-                                   </Form>             
-
-
-                            </div>)}
+                                        {/* Due Date */}
+                                        <div className="mt-4">
+                                            <label
+                                                htmlFor="dueDate"
+                                                className="block mb-1 font-normal font-serif text-gray-500">
+                                                Due Date
+                                            </label>
+                                            <Form.Item
+                                                name="dueDate"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message:
+                                                            "Please select due date!",
+                                                    },
+                                                ]}>
+                                                <DatePicker />
+                                            </Form.Item>
+                                        </div>
+                                    </Form>
+                                </div>
+                            )}
                             <Box
                                 sx={{
                                     display: "flex",
@@ -518,7 +551,7 @@ export default function HorizontalNonLinearStepper() {
                                     ) : (
                                         <Button onClick={handleComplete}>
                                             {completedSteps() ===
-                                                totalSteps() - 1
+                                            totalSteps() - 1
                                                 ? "Finish"
                                                 : "Complete Step"}
                                         </Button>
