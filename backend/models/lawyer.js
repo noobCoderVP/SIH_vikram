@@ -16,25 +16,20 @@ const lawyerSchema = mongoose.Schema(
         password: {
             type: String,
             required: true,
-            maxLength: 30,
+            maxLength: 100,
         },
         email: {
             type: String,
             required: true,
             unique: true,
         },
-        type_of_service_tag: {
-            type: String,
-            required: true,
-        },
-        specialization_tags: {
+        tags: {
             type: [String],
-            required: false,
         },
         tier: {
-            type: Number,
-            min: 1,
-            max: 5,
+            type: String,
+            // min: 1,
+            // max: 5,
         },
         rating: {
             type: Number,
