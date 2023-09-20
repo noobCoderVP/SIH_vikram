@@ -13,8 +13,8 @@ const LawyerTag = ({ text, color }) => {
         // this will work anyways
         <div className="mr-1">
             <Chip
-                // style={{backgroundColor: color}}
-                style={{ zIndex: "1" }}
+                style={{backgroundColor: color}}
+                // style={{ zIndex: "1" }}
                 color="primary"
                 label={text}
                 onClick={handleClick}

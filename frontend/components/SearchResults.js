@@ -1,8 +1,8 @@
 // src/SearchPage.js
 import React, { useState } from 'react';
-import LawyerCard from '../components/LawyerCard';
+import LawyerCard from './LawyerCard';
 
-export default function AIResults(searchQueryProps = '') {
+export default function SearchResults(searchQueryProps = '') {
     const [searchQuery, setSearchQuery] = useState('');
     if (Object.keys(searchQueryProps).length != 0) {
         setSearchQuery(searchQueryProps);
@@ -63,4 +63,3 @@ export default function AIResults(searchQueryProps = '') {
         </>
     );
 };
-

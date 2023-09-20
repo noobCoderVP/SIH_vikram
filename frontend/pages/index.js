@@ -1,11 +1,11 @@
 import { Inter } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import SearchBox from "@/components/SearchBox";
+import AIQueryBox from "@/components/AIQueryBox";
 import FeedbackCarousel from "@/components/FeedbackCarousel";
 import ServicesSection from "@/components/ServicesSection";
 import FaqSection from "@/components/FaqSection";
-import AIResults from "@/components/AIResults";
+import SearchResults from "@/components/SearchResults";
 import LetterByLetterCard from "@/components/LetterByLetterCard";
 import TagSection from "@/components/TagSection";
 import { useState } from "react";
@@ -19,8 +19,9 @@ export default function HomePage() {
     };
 
     const [aiResponse, setAiResponse] = useState(
-        "Please give a well-framed query for the legal services you need to our AI and it will find you a solution and the best providers on our website for the same ! ",
-    );
+        // "Please give a well-framed query for the legal services you need to our AI and it will find you a solution and the best providers on our website for the same ! ",
+        "",
+        );
     // const updateSearched = newValue => {
     //     setSearched(newValue);
     // };
@@ -42,7 +43,7 @@ export default function HomePage() {
                 <Head>
                     <title>NyayBazaar</title>
                 </Head>
-                <SearchBox
+                <AIQueryBox
                     updateSearched={updateSearched}
                     setAiResponse={setAiResponse}
                 />
