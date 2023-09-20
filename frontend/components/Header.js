@@ -40,13 +40,13 @@ const Header = props => {
                                 </Link>
                             </li>
                         )}
-                        <li>
+                        {/* <li>
                             <Link
                                 href="/profile"
                                 className="text-black hover:underline">
                                 Profile
                             </Link>
-                        </li>
+                        </li> */}
                         <li>
                             <Link
                                 href="/cases"
