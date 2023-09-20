@@ -19,8 +19,9 @@ export default function HomePage() {
     };
 
     const [aiResponse, setAiResponse] = useState(
-        "Please give a well-framed query for the legal services you need to our AI and it will find you a solution and the best providers on our website for the same ! ",
-    );
+        // "Please give a well-framed query for the legal services you need to our AI and it will find you a solution and the best providers on our website for the same ! ",
+        "",
+        );
     // const updateSearched = newValue => {
     //     setSearched(newValue);
     // };

@@ -2,7 +2,6 @@
 import React, { useState , useEffect} from "react";
 import LawyerCard from "../components/LawyerCard";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import axios from "axios";
 import { Autocomplete } from "@mui/material";
 import TextField from "@mui/material/TextField";
@@ -79,31 +78,6 @@ export default function LawyerSearch() {
                 // Handle any errors that occur during the API call
                 console.error('API Error:', error);
             });
-        // In a real application, you would fetch lawyer data based on the search query.
-        // For this example, let's use mock data.
-        const mockLawyerData = [
-            {
-                id: 1,
-                name: "Lawyer 1",
-                description: "Description for Lawyer 1",
-                imageUrl: "/face.jpg",
-            },
-            {
-                id: 2,
-                name: "Lawyer 2",
-                description: "Description for Lawyer 2",
-                imageUrl: "/face.jpg",
-            },
-            {
-                id: 3,
-                name: "Lawyer 3",
-                description: "Description for Lawyer 3",
-                imageUrl: "/face.jpg",
-            },
-            // Add more lawyer data as needed
-        ];
-
-        // setLawyerData(mockLawyerData);
     };
 
     return (

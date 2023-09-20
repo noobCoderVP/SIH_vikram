@@ -4,6 +4,7 @@ import axios from "axios";
 
 const AIQueryBox = ({ updateSearched, setAiResponse }) => {
     const [inputText, setInputText] = useState(""); // State to store the input text
+    
 
     // Event handler to update inputText when the user types in the search box
     const handleInputChange = e => {
@@ -16,6 +17,7 @@ const AIQueryBox = ({ updateSearched, setAiResponse }) => {
 
     // Event handler to submit the form and make the API call
     const handleSubmit = async e => {
+        updateSearched(true);
         e.preventDefault(); // Prevent the default form submission behavior
 
         try {
@@ -29,7 +31,6 @@ const AIQueryBox = ({ updateSearched, setAiResponse }) => {
             if (response.data) {
                 // Trigger the updateSearched function in the parent component and set the AI Response
                 setAiResponse(response.data.message);
-                updateSearched(true);
             }
         } catch (error) {
             // Handle any errors that occur during the API call
@@ -105,6 +106,7 @@ const AIQueryBox = ({ updateSearched, setAiResponse }) => {
                     </form>
                 </div>
             </div>
+
         </div>
     );
 };
