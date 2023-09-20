@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
-import { DatePicker } from "antd";
+import { DatePicker, InputNumber } from "antd";
 import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -15,6 +15,7 @@ import {
     Select,
     Dropdown,
     Upload,
+    Space
 } from "antd";
 import { UploadOutlined } from '@ant-design/icons';
 import Header from "@/components/Header";
@@ -426,7 +427,69 @@ export default function HorizontalNonLinearStepper() {
                                 </Form>
 
                             </div>)}
-                            {activeStep == 2 && <h1>Step 3</h1>}
+                            {activeStep == 2 && (<div>
+                                {/* Step3 - Payments starts here  */}
+
+                                <Form
+                                    name="payments"
+                                    className="mt-6 m-auto w-full max-w-sm p-4 bg-white border border-gray-200 shadow sm:p-6 md:p-6"
+                                    initialValues={{ remember: true }}
+                                    onFinish={onFinish}
+                                    onFinishFailed={onFinishFailed}
+                                    autoComplete="off"
+                                >
+                                    {/* Payments */}
+                                    <div className="border-b-2 pb-3 flex justify-between items-center">
+                                        <h1 className="text-lg font-semibold text-gray-500">
+                                            Payment
+                                        </h1>
+                                    </div>
+
+                                    {/* Amount */}
+                                    <div className="mt-4">
+                                        <label
+                                            htmlFor="Amount"
+                                            className="block mb-1 font-normal font-serif text-gray-500"
+                                        >
+                                            Amount
+                                        </label>
+                                        <Form.Item
+                                            name="Amount"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: "Please enter amount!",
+                                                },
+                                            ]}
+                                        >
+                                           <InputNumber></InputNumber>
+                                        </Form.Item>
+                                    </div>
+
+                                    {/* Due Date */}
+                                    <div className="mt-4">
+                                        <label
+                                            htmlFor="dueDate"
+                                            className="block mb-1 font-normal font-serif text-gray-500"
+                                        >
+                                            Due Date
+                                        </label>
+                                        <Form.Item
+                                            name="dueDate"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: "Please select due date!",
+                                                },
+                                            ]}
+                                        >
+                                           <DatePicker />
+                                        </Form.Item>
+                                    </div>
+                                   </Form>             
+
+
+                            </div>)}
                             <Box
                                 sx={{
                                     display: "flex",
