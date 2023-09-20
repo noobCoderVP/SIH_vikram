@@ -25,9 +25,9 @@ searchRouter.get("/search", async (req, res) => {
             "form", "stampduty", "dispute",
           ];
 
-        // tos === "all"
-        // ? (tos = [...tosOptions])
-        // : (tos = req.query.tos);
+        tos === "all"
+        ? (tos = [...tosOptions])
+        : (tos = req.query.tos);
 
         spec === "all"
         ? (spec = [...specOptions])
@@ -49,13 +49,19 @@ searchRouter.get("/search", async (req, res) => {
         let query = Lawyer.find({ name: { $regex: search, $options: "i" } })
 
         if (tos !== "all") {
-            query = query.where("type_of_service_tag").equals(tos);
+            if (typeof tos === "string") {
+                // Convert tos to an array by splitting it using a comma or other appropriate separator
+                tos = tos.split(',').map(tag => tag.trim());
+            }
+        
+            query = query.where("type_of_service_tag")
+                .in([...tos.map(tag => new RegExp(tag, 'i'))]);
         }
 
         query = query
-                    .where("specialization_tags")
-                    .in([...spec])
-                    .sort(sortBy);
+                .where("specialization_tags")
+                .in(spec.map(tag => new RegExp(tag, 'i')))
+                .sort(sortBy);
                     // .skip(page * limit)
                     // .limit(limit);
                     

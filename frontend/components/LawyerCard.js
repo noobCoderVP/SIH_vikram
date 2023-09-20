@@ -1,20 +1,27 @@
 // Card.js
 import React from "react";
 import { Rating } from "flowbite-react";
+import { Button } from "@mui/material";
 import LawyerTag from "./LawyerTag";
 import Link from "next/link";
 
-const LawyerCard = ({
-    imageUrl,
-    name,
-    username,
-    rating,
-    experience,
-    renderButton = true,
-    tier,
-    tags,
-}) => {
+const LawyerCard = ({ lawyer }) => {
+    const {
+        name,
+        type_of_service_tag: typeOfServiceTag,
+        specialization_tags: specializationTags,
+        tier,
+        rating,
+        about: description,
+        experience,
+        verified,
+        username,
+    } = lawyer;
     const location = "Mumbai, Maharashtra";
+    const imageUrl =
+        "https://t4.ftcdn.net/jpg/03/32/59/65/240_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg"; // default for now
+    const renderButton = true;
+
     const renderStars = rating => {
         const starIcons = [];
         for (let i = 0; i < parseInt(rating); i++) {
@@ -37,37 +44,49 @@ const LawyerCard = ({
                     />
                 </div>
                 <div className="col-span-3 ml-4">
-                    <div className="font-bold text-black text-xl mb-2">
-                        {name}
+                    <div className="flex items-center">
+                        <div className="font-bold text-black text-xl mb-2">
+                            {name}
+                        </div>
+                        {verified && (
+                            <span className="ml-2 text-green-700">✅</span>
+                        )}
                     </div>
                     <p className="text-gray-700 text-base">{location}</p>
                     <p className="text-gray-700 text-base">
                         {experience + " years of experience"}
                     </p>
+                    {description && (
+                        <p className="text-gray-700 text-base mt-2">
+                            {description}
+                        </p>
+                    )}
                     <div className="grid grid-cols-4">
                         <Rating className="">{renderStars(rating)}</Rating>
-                        <p className="ml-2 mb-1 text-gray-700 text-sm">
-                            {rating}
-                        </p>
                     </div>
                 </div>
             </div>
             <br />
-            <div class="bg-gray-300 h-px w-full"></div>
+            <div className="bg-gray-300 h-px w-full"></div>
             <div className="flex flex-wrap px-4 py-4">
-                <p className="text-black text-xl mr-2 font-semibold">Tags: </p>
-                {tags.map(e => {
-                    return <LawyerTag text={e} color="blue" />;
-                })}
+                {typeOfServiceTag && (
+                    <LawyerTag text={typeOfServiceTag} color="green" />
+                )}
+                {specializationTags &&
+                    specializationTags.length > 0 &&
+                    specializationTags.map((tag, index) => (
+                        <LawyerTag key={index} text={tag} color="blue" />
+                    ))}
             </div>
-            <div class="bg-gray-300 h-px w-full"></div>
+
+            <div className="bg-gray-300 h-px w-full"></div>
             <div className="bg-gray-100 p-4 border-t border-gray-300">
                 <div className="flex justify-between items-center">
                     <div>
                         <p className="text-gray-600 text-sm font-semibold">
-                            Avg Rate
+                            Avg Rating
                         </p>
-                        <p className="text-2xl text-indigo-600">10</p>
+                        <p className="text-2xl text-indigo-600">{rating}</p>
                     </div>
                     <div>
                         <p className="text-gray-600 text-sm font-semibold">
@@ -78,9 +97,14 @@ const LawyerCard = ({
                     {renderButton ? (
                         <div>
                             <Link
-                                className="bg-indigo-600 text-white py-2 px-2 rounded-lg hover:bg-indigo-700"
+                                className="text-black hover:text-white"
                                 href={`/lawyer/profile/${username}`}>
-                                Go to Lawyer's Page
+                                <Button
+                                    className="text-black hover:text-white"
+                                    variant="contained"
+                                    color="secondary">
+                                    Go To Lawyer's Profile
+                                </Button>
                             </Link>
                         </div>
                     ) : (

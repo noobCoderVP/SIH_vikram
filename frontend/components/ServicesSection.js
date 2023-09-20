@@ -9,9 +9,9 @@ const ServicesSection = () => {
                 "You can use artificial intelligence based AI advisor to find legal advices. You can also take help of our AI system to find good lawyers",
         },
         {
-            title: "Lawyers",
+            title: "Legal Service Providers",
             description:
-                "Our lawyers are the best to fight for your case. We have a team of lawyers who are experts in law and can help you with any property related issues.",
+                "Our team of experts includes lawyers, arbitrators, paralegals, and mediators, all dedicated to serving your legal needs. Whether you're facing complex legal disputes, seeking guidance on family matters, or navigating corporate intricacies, our professionals are here to assist you.",
         },
         {
             title: "Incentives",
