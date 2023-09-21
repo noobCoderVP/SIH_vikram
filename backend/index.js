@@ -14,6 +14,7 @@ import searchRouter from "./routes/search.js";
 import aiRouter from "./routes/openai.js";
 import helpRouter from "./routes/help.js";
 import lawyerRouter from "./routes/lawyer.js";
+import verifyRouter from "./routes/verify.js";
 
 // dirname
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -46,6 +47,7 @@ app.use("/api", searchRouter);
 app.use("/help", helpRouter);
 app.use("/lawyer", lawyerRouter);
 app.use("/api", aiRouter);
+app.use("/api", verifyRouter);
 
 app.get("/", (req, res) => {
     res.status(200).json({ hello: "world" });
