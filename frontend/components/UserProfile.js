@@ -57,13 +57,21 @@ function UserProfile() {
         {/* Chat Section - You can integrate your chat component here */}
         <div className="grid grid-cols-7">
 
-          <div className="col-span-4 mr-4">
-            <div className="mt-8 text-black">
-              <h2 className="text-3xl font-semibold mb-4">Verify yourself</h2>
+          <div className="col-span-4 m-4">
+            <div className="mt-auto text-black">
+              <h2 className="text-3xl font-semibold mb-4">Verify Yourself</h2>
+              <div className="flex flex-row mb-4">
               <DocumentUpload />
+              <p className="text-lg ml-4 my-auto"> Aadhar Verification </p>
+              </div>
+              <div className="flex flex-row">
+              <DocumentUpload />
+              <p className="text-lg ml-4 my-auto"> Degree Verification </p>
+              </div>
             </div>
             <IncentivesSection />
           </div>
+
           <div className="col-span-3">
             <div className="flex flex-row bg-blue-500 rounded-lg p-2 shadow-lg">
             <p className="text-white font-semibold my-auto text-lg"> Check Your Cases: </p>
