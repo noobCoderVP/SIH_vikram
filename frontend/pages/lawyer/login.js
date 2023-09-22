@@ -46,7 +46,7 @@ const Login = () => {
             <Header />
             <Form
                 name="basic"
-                className="m-auto w-full max-w-sm p-4 bg-white border border-gray-200 shadow sm:p-6 md:p-6"
+                className="m-auto mt-16  w-full max-w-sm p-4 bg-white border border-gray-200 shadow sm:p-6 md:p-6"
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
