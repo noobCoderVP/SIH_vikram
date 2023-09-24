@@ -5,6 +5,7 @@ import { ChatItem } from 'react-chat-elements';
 import Header from './Header';
 import IncentivesSection from './IncentivesSection';
 import DocumentUpload from './DocumentUpload';
+import VerificationComponent from './VerificationComponent';
 
 function UserProfile() {
   // Placeholder user data
@@ -59,15 +60,11 @@ function UserProfile() {
 
           <div className="col-span-4 m-4">
             <div className="mt-auto text-black">
-              <h2 className="text-3xl font-semibold mb-4">Verify Yourself</h2>
-              <div className="flex flex-row mb-4">
-              <DocumentUpload />
-              <p className="text-lg ml-4 my-auto"> Aadhar Verification </p>
-              </div>
-              <div className="flex flex-row">
-              <DocumentUpload />
-              <p className="text-lg ml-4 my-auto"> Degree Verification </p>
-              </div>
+
+              <h2 className="text-3xl font-semibold mb-2">Verify Yourself</h2>
+              <VerificationComponent itemToBeVerified={"Aadhar Card"}/>
+              <VerificationComponent itemToBeVerified={"Law Degree"}/>
+
             </div>
             <IncentivesSection />
           </div>
