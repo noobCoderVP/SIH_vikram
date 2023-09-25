@@ -4,12 +4,40 @@ import LawyerCard from "./LawyerCard"; // You can reuse your Card component
 import FeedbackCarousel from "./FeedbackCarousel";
 import FeedbackCard from "./FeedbackCard";
 import { Rating } from "flowbite-react";
+import { useState } from "react";
+import { loadStripe } from "@stripe/stripe-js";
 import ChatButton from "./ChatButton";
 import Link from "next/link";
 
 const LawyerProfile = props => {
     const { name, about, experience, rating, tags, tier } = props.details;
     console.log(tags);
+
+    let stripePromise;
+    const getStripe = () => {
+        if(!stripePromise){
+            stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+        }
+        return stripePromise;
+    }
+
+    async function handleCheckout() {
+        const stripe = await getStripe();
+        const { error } = await stripe.redirectToCheckout({
+          lineItems: [
+            {
+              price: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID,
+              quantity: 1,
+            },
+          ],
+          mode: 'payment',
+          successUrl: `http://localhost:3000/profile`,
+          cancelUrl: `http://localhost:3000/`,
+          customerEmail: 'customer@email.com',
+        });
+        console.warn(error.message);
+      }
+
     const feedbackData = {
         name: "John Doe",
         rating: 4, // You can set the rating from 0 to 5
@@ -34,9 +62,9 @@ const LawyerProfile = props => {
                                 {" "}
                                 Checkout:{" "}
                             </p>
-                            <Link href="/checkout" className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                            <button onClick={handleCheckout} className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
                                 Checkout
-                            </Link>
+                            </button>
                         </div>
                         {/* <div className="mt-4 mb-6">
                             <h2 className="text-xl font-semibold mb-4">
