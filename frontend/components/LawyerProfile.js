@@ -7,7 +7,8 @@ import { Rating } from "flowbite-react";
 import ChatButton from "./ChatButton";
 
 const LawyerProfile = props => {
-    const { name, about, experience, rating, tags, tier } = props.details;
+    const { name, about, experience, rating, tags, tier, username } =
+        props.details;
     console.log(tags);
     const feedbackData = {
         name: "John Doe",
@@ -28,7 +29,7 @@ const LawyerProfile = props => {
                                 {" "}
                                 Talk to Me:{" "}
                             </p>
-                            <ChatButton io={props.io} />
+                            <ChatButton username={username} io={props.io} />
                             <p className="text-xl text-black font-semibold ml-4 mr-4">
                                 {" "}
                                 Connect on WhatsApp{" "}
@@ -91,9 +92,9 @@ const LawyerProfile = props => {
                     {/* Right Column */}
                     <div className="lg:w-1/3">
                         <LawyerCard
-                                key={props._id} // Use a unique identifier from your data as the key
-                                lawyer={props} // Pass the lawyer data as a prop
-                            />
+                            key={props._id} // Use a unique identifier from your data as the key
+                            lawyer={props} // Pass the lawyer data as a prop
+                        />
                     </div>
                 </div>
             </div>
