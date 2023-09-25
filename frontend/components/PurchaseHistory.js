@@ -11,8 +11,8 @@ function PurchaseHistory() {
         <div className="bg-gray-100 p-4 rounded-lg flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <div>
-              <h3 className="text-lg font-semibold">Product Name</h3>
-              <p className="text-gray-600">Consultation with John Doe</p>
+              <h3 className="text-lg font-semibold">Consultation</h3>
+              <p className="text-gray-600">Time: 1hr | Person: Toshan Luktuke</p>
             </div>
           </div>
           <span className="text-green-500 font-semibold">₹3000.0</span>
@@ -20,15 +20,15 @@ function PurchaseHistory() {
         
         {/* Repeat the above structure for each purchased item */}
         
-        {/* Example item 2 */}
+        {/* Example item 2
         <div className="bg-gray-100 p-4 rounded-lg flex items-center justify-between">
-          {/* ... */}
+          
         </div>
         
-        {/* Example item 3 */}
+        
         <div className="bg-gray-100 p-4 rounded-lg flex items-center justify-between">
-          {/* ... */}
-        </div>
+   
+        </div> */}
       </div>
     </div>
   );
