@@ -81,6 +81,19 @@ const Header = props => {
                                 Newsletter
                             </Link>
                         </li>
+
+                            {/* Identify user and lawyer */}
+                        {!(type == "lawyer") && (
+                            <li>
+                                <Image src="/user.png" width={24} height={24} />
+                            </li>
+                        )}
+                        {(type == "lawyer") && (
+                            <li>
+                                <Image src="/lawyer.png" width={24} height={24} />
+                                
+                            </li>
+                        )}
                         <li className="">
                             {logged ? <LogoutButton /> : <LoginButton />}
                         </li>
