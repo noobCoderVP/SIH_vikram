@@ -7,6 +7,7 @@ import ServicesSection from "@/components/ServicesSection";
 import FaqSection from "@/components/FaqSection";
 import SearchResults from "@/components/SearchResults";
 import LetterByLetterCard from "@/components/LetterByLetterCard";
+import PortalToLegalButton from "@/components/PortalToLegalButton";
 import TagSection from "@/components/TagSection";
 import { useState } from "react";
 import LawyerRegistration from "@/components/LawyerRegistration";
@@ -52,6 +53,7 @@ export default function HomePage() {
                 {searched ? (
                     <div className="bg-gray-100 ">
                         <LetterByLetterCard text={aiResponse} />
+                        <PortalToLegalButton text={aiResponse} />
                         {/* <div className="col-span-2 mt-6 p-4 bg-gray-100">
                         <AIResults />
                         <TagSection chipData={chipData} />

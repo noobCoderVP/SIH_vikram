@@ -2,7 +2,7 @@ import React from 'react';
 
 function IncentivesSection() {
     return (
-        <section className="bg-gray-100 text-black py-12">
+        <section className="bg-gray-100 text-black py-6">
             <div className="container mx-auto text-center">
                 <h2 className="text-3xl font-semibold mb-6">Our Incentives</h2>
                 <p className="text-gray-600 mb-8">

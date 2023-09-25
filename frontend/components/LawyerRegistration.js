@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 
 function LawyerRegistration() {
     return (
-        <section className="bg-white text-black pt-10">
+        <section className="bg-slate-100 text-black pt-5">
             <div className="w-full mx-auto text-center py-2 bg-slate-100">
                 <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold text-black mb-4">
                     Register as a Lawyer
