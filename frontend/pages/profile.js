@@ -23,8 +23,9 @@ export default function ProfilePage() {
             ) : (
                 <>
                     <Header />
-                    <div className="fixed inset-0 bg-gray-300 flex justify-center items-center">
-                        <LoginButton />
+                    <div className='fixed inset-0 bg-gray-300 flex flex-col justify-center items-center'>
+                        <p className='text-black text-xl font-semibold mb-4'>Please Login to Continue to your Profile</p>
+                        <LoginButton/>
                     </div>
                 </>
             )}
