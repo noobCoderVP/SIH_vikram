@@ -8,6 +8,8 @@ import DocumentUpload from './DocumentUpload';
 import VerificationComponent from './VerificationComponent';
 import IncentiveProgress from './IncentiveProgress';
 import CaseTable from './CaseTable';
+import Link from 'next/link';
+import PurchaseHistory from './PurchaseHistory';
 
 function UserPersonalProfile() {
   // Placeholder user data
@@ -70,7 +72,7 @@ function UserPersonalProfile() {
             </div>
             {/* <IncentivesSection /> */}
             {/* <IncentiveProgress goal="Receive 5% more recommendations" requirements="Have 10 solved cases with more than a 4 star rating" progress="50" /> */}
-
+            <PurchaseHistory />
           </div>
 
           <div className="col-span-3">

@@ -10,7 +10,7 @@ import LoginButton from '@/components/LoginButton';
 import Head from 'next/head';
 
 export default function ProfilePage() {
-    const lawyer = true;
+    const lawyer = false;
     const logged = true;
     return (
         <>
