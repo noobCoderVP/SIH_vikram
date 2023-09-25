@@ -3,7 +3,7 @@ import { ChatList } from "react-chat-elements";
 
 function Userlist({ users }) {
     return (
-        <div className="w-72 border-2 border-slate-500">
+        <div className="text-black border-gray-300 shadow-md">
             {users.map(user => (
                 <div>
                     <ChatList
@@ -12,11 +12,11 @@ function Userlist({ users }) {
                             {
                                 avatar: "https://avatars.githubusercontent.com/u/80540635?v=4",
                                 alt: "kursat_avatar",
-                                title: "Kursat",
+                                title: user.name,
                                 subtitle:
-                                    "Why don't we go to the No Way Home movie this weekend ?",
+                                    user.message,
                                 date: new Date(),
-                                unread: 3,
+                                unread: 0,
                             },
                         ]}
                     />
