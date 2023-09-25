@@ -7,6 +7,7 @@ import IncentivesSection from './IncentivesSection';
 import DocumentUpload from './DocumentUpload';
 import VerificationComponent from './VerificationComponent';
 import IncentiveProgress from './IncentiveProgress';
+import CaseTable from './CaseTable';
 
 function UserProfile() {
   // Placeholder user data
@@ -73,18 +74,6 @@ function UserProfile() {
           </div>
 
           <div className="col-span-3">
-            <div className="flex flex-row bg-blue-500 rounded-lg p-2 shadow-lg">
-            <p className="text-white font-semibold my-auto text-lg"> Check Your Cases: </p>
-            <button
-              onClick={handleSubmit}
-              type="submit"
-              class="text-white
-                            bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-blue-300 
-                            font-medium rounded-lg text-sm px-4 py-2 ml-2 mb-auto mt-auto dark:bg-slate-600 dark:hover:bg-blue-700 
-                            dark:focus:ring-blue-800">
-              Cases
-            </button>
-            </div>
             <p className="text-black text-center font-semibold text-lg"> Chat </p>
             <ChatList
               className="chat-list bg-gray-100 p-4 text-black rounded-lg border border-gray-300 shadow-md"
@@ -123,7 +112,7 @@ function UserProfile() {
                 },
               ]}
             />
-
+            <CaseTable />
           </div>
         </div>
       </div>
