@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Header from "@/components/Header";
 import { Accordion } from "flowbite-react";
+import CircularIndeterminate from "@/components/Loader";
 
 function incentive() {
+    const [loaded, setLoaded] = useState(false);
+    useEffect(() => {
+        setLoaded(true);
+    }, []);
+    if (!loaded) {
+        return <CircularIndeterminate />;
+    }
     return (
         <>
             <Head>
