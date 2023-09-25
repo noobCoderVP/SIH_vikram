@@ -4,11 +4,41 @@ import LawyerCard from "./LawyerCard"; // You can reuse your Card component
 import FeedbackCarousel from "./FeedbackCarousel";
 import FeedbackCard from "./FeedbackCard";
 import { Rating } from "flowbite-react";
+import { useState } from "react";
+import { loadStripe } from "@stripe/stripe-js";
 import ChatButton from "./ChatButton";
+import Link from "next/link";
 
 const LawyerProfile = props => {
-    const { name, about, experience, rating, tags, tier } = props.details;
+    const { name, about, experience, rating, tags, tier, username } =
+        props.details;
     console.log(tags);
+
+    let stripePromise;
+    const getStripe = () => {
+        if(!stripePromise){
+            stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+        }
+        return stripePromise;
+    }
+
+    async function handleCheckout() {
+        const stripe = await getStripe();
+        const { error } = await stripe.redirectToCheckout({
+          lineItems: [
+            {
+              price: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID,
+              quantity: 1,
+            },
+          ],
+          mode: 'payment',
+          successUrl: `http://localhost:3000/profile`,
+          cancelUrl: `http://localhost:3000/`,
+          customerEmail: 'customer@email.com',
+        });
+        console.warn(error.message);
+      }
+
     const feedbackData = {
         name: "John Doe",
         rating: 4, // You can set the rating from 0 to 5
@@ -28,12 +58,14 @@ const LawyerProfile = props => {
                                 {" "}
                                 Talk to Me:{" "}
                             </p>
-                            <ChatButton io={props.io} />
+                            <ChatButton username={username} io={props.io} />
                             <p className="text-xl text-black font-semibold ml-4 mr-4">
                                 {" "}
-                                Connect on WhatsApp{" "}
+                                Checkout:{" "}
                             </p>
-                            <ChatButton io={props.io} />
+                            <button onClick={handleCheckout} className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                                Checkout
+                            </button>
                         </div>
                         {/* <div className="mt-4 mb-6">
                             <h2 className="text-xl font-semibold mb-4">
@@ -91,9 +123,9 @@ const LawyerProfile = props => {
                     {/* Right Column */}
                     <div className="lg:w-1/3">
                         <LawyerCard
-                                key={props._id} // Use a unique identifier from your data as the key
-                                lawyer={props} // Pass the lawyer data as a prop
-                            />
+                            key={props._id} // Use a unique identifier from your data as the key
+                            lawyer={props} // Pass the lawyer data as a prop
+                        />
                     </div>
                 </div>
             </div>

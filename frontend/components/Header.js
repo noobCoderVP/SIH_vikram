@@ -21,9 +21,7 @@ const Header = props => {
                 <nav className="flex justify-between items-center">
                     <Image src={logo} width={40} height={40}></Image>
                     <div className="text-blue-800 text-2xl font-semibold mr-auto ml-4">
-                        <Link
-                            href="/"
-                            className="hover:underline">
+                        <Link href="/" className="hover:underline">
                             NyayBazaar
                         </Link>
                     </div>
@@ -40,17 +38,17 @@ const Header = props => {
                                 <Link
                                     href="/lawyers"
                                     className="text-black hover:underline">
-                                    Legal Services 
+                                    Legal Services
                                 </Link>
                             </li>
                         )}
-                        {/* <li>
+                        <li>
                             <Link
                                 href="/profile"
                                 className="text-black hover:underline">
                                 Profile
                             </Link>
-                        </li> */}
+                        </li>
                         <li>
                             <Link
                                 href="/cases"
@@ -67,6 +65,14 @@ const Header = props => {
                                 </Link>
                             </li>
                         )}
+
+                        <li>
+                            <Link
+                                href="/chats"
+                                className="text-black hover:underline">
+                                Chats
+                            </Link>
+                        </li>
                         <li>
                             <Link
                                 href="/help"
@@ -82,18 +88,28 @@ const Header = props => {
                             </Link>
                         </li>
 
-                            {/* Identify user and lawyer */}
+                        <li className="text-black hover:underline">
+                            {logged ? (
+                                <Link href="/profile"> Profile </Link>
+                            ) : null}
+                        </li>
+
+                        {/* Identify user and lawyer */}
                         {!(type == "lawyer") && (
                             <li>
                                 <Image src="/user.png" width={24} height={24} />
                             </li>
                         )}
-                        {(type == "lawyer") && (
+                        {type == "lawyer" && (
                             <li>
-                                <Image src="/lawyer.png" width={24} height={24} />
-                                
+                                <Image
+                                    src="/lawyer.png"
+                                    width={24}
+                                    height={24}
+                                />
                             </li>
                         )}
+
                         <li className="">
                             {logged ? <LogoutButton /> : <LoginButton />}
                         </li>

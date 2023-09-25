@@ -2,9 +2,18 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import Head from "next/head";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import CircularIndeterminate from "@/components/Loader";
 
 export default function NotFoundPage() {
+    const [loaded, setLoaded] = useState(false);
+    useEffect(() => {
+        setLoaded(true);
+    }, []);
+
+    if (!loaded) {
+        return <CircularIndeterminate />;
+    }
     return (
         <>
             <Head>
