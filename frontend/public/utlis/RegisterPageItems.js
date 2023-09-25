@@ -61,19 +61,19 @@ export const experienceItems = [
 export const tierItems = [
     {
       label: 'Platinum',
-      key: '4', 
+      key: 4, 
     },
     {
       label: 'Gold',
-      key: '3',
+      key: 3,
     },
     {
       label: 'Silver',
-      key: '2',
+      key: 2,
     },
     ,
     {
       label: 'Bronze',
-      key: '1',
+      key: 1,
     },
   ];

@@ -90,7 +90,7 @@ export default function LawyerSearch() {
             // Access the data sent from the parent window
             const data = event.data;
             setSelectedTypeOfService(data);
-            setSelectedSpecialization(data);
+            // setSelectedSpecialization(data);
             // Handle the received data as needed
             console.log("Received data in the child window:", data);
         });
