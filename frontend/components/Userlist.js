@@ -3,7 +3,7 @@ import { ChatList } from "react-chat-elements";
 
 function Userlist({ users }) {
     return (
-        <div className="w-72 border-2 border-slate-500">
+        <div className="text-black border-gray-300 shadow-md">
             {users.map(user => (
                 <div>
                     <ChatList
@@ -15,7 +15,7 @@ function Userlist({ users }) {
                                 title: user.name,
                                 subtitle: user.message,
                                 date: new Date(),
-                                unread: 3,
+                                unread: 0,
                             },
                         ]}
                     />
