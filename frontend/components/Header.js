@@ -81,6 +81,9 @@ const Header = props => {
                                 Newsletter
                             </Link>
                         </li>
+                        <li className="text-black hover:underline" >
+                            {logged ? <Link href="/profile"> Profile </Link> : null}
+                        </li>
                         <li className="">
                             {logged ? <LogoutButton /> : <LoginButton />}
                         </li>

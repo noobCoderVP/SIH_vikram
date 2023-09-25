@@ -9,7 +9,7 @@ import VerificationComponent from './VerificationComponent';
 import IncentiveProgress from './IncentiveProgress';
 import CaseTable from './CaseTable';
 
-function UserProfile() {
+function LawyerPersonalProfile() {
   // Placeholder user data
   const userData = {
     name: 'John Doe',
@@ -120,4 +120,4 @@ function UserProfile() {
   );
 }
 
-export default UserProfile;
+export default LawyerPersonalProfile;
