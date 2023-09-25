@@ -21,7 +21,7 @@ chatRouter.post("/", async (req, res) => {
             status: false,
         });
     } finally {
-        await disconnect();
+        // await disconnect();
     }
 });
 
