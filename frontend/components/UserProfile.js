@@ -5,6 +5,8 @@ import { ChatItem } from 'react-chat-elements';
 import Header from './Header';
 import IncentivesSection from './IncentivesSection';
 import DocumentUpload from './DocumentUpload';
+import VerificationComponent from './VerificationComponent';
+import IncentiveProgress from './IncentiveProgress';
 
 function UserProfile() {
   // Placeholder user data
@@ -57,13 +59,19 @@ function UserProfile() {
         {/* Chat Section - You can integrate your chat component here */}
         <div className="grid grid-cols-7">
 
-          <div className="col-span-4 mr-4">
-            <div className="mt-8 text-black">
-              <h2 className="text-3xl font-semibold mb-4">Verify yourself</h2>
-              <DocumentUpload />
+          <div className="col-span-4 m-4">
+            <div className="mt-auto text-black">
+
+              <h2 className="text-3xl font-semibold mb-2">Verify Yourself</h2>
+              <VerificationComponent itemToBeVerified={"Aadhar Card"}/>
+              <VerificationComponent itemToBeVerified={"Law Degree"}/>
+
             </div>
             <IncentivesSection />
+            <IncentiveProgress goal="Receive 5% more recommendations" requirements="Have 10 solved cases with more than a 4 star rating" progress="50" />
+
           </div>
+
           <div className="col-span-3">
             <div className="flex flex-row bg-blue-500 rounded-lg p-2 shadow-lg">
             <p className="text-white font-semibold my-auto text-lg"> Check Your Cases: </p>

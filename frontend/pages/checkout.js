@@ -25,10 +25,31 @@ const OrderSummary = () => {
 };
 
 export default function Checkout({ featuredProduct, newProducts }) {
-    const [clientSecretSettings, setClientSecretSettings] = useState({
-        clientSecret: "",
-        loading: true,
-    });
+    let stripePromise;
+    const getStripe = () => {
+        if(!stripePromise){
+            stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+        }
+        return stripePromise;
+    }
+
+    async function handleCheckout() {
+        const stripe = await getStripe();
+        const { error } = await stripe.redirectToCheckout({
+          lineItems: [
+            {
+              price: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID,
+              quantity: 1,
+            },
+          ],
+          mode: 'payment',
+          successUrl: `http://localhost:3000/success`,
+          cancelUrl: `http://localhost:3000/cancel`,
+          customerEmail: 'customer@email.com',
+        });
+        console.warn(error.message);
+      }
+
     return (
         <div className="bg-gray-200 h-screen w-screen">
             <Header />
@@ -40,23 +61,25 @@ export default function Checkout({ featuredProduct, newProducts }) {
                     <div class="rounded-l-xl bg-white basis-1/2 p-10">
                         <OrderSummary />
                     </div>
-                    <div class="rounded-r-xl bg-blue-200 basis-1/2 p-10">
+                    <button onClick={handleCheckout}> Stripe Checkout</button>
+                    {/* <div class="rounded-r-xl bg-blue-200 basis-1/2 p-10">
                         {clientSecretSettings.loading ? (
                             <h1 class="font-semibold text-3xl font-sans">
                                 Loading ...
                             </h1>
                         ) : (
-                            <Elements
-                                stripe={stripePromise}
-                                options={{
-                                    clientSecret:
-                                        clientSecretSettings.clientSecret,
-                                    appearance: { theme: "stripe" },
-                                }}>
-                                <CheckoutForm />
-                            </Elements>
+                            null
+                            // <Elements
+                            //     stripe={stripePromise}
+                            //     options={{
+                            //         clientSecret:
+                            //             clientSecretSettings.clientSecret,
+                            //         appearance: { theme: "stripe" },
+                            //     }}>
+                            //     <CheckoutForm />
+                            // </Elements>
                         )}
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
