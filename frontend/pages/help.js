@@ -8,12 +8,14 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Header from "@/components/Header";
+import CircularIndeterminate from "@/components/Loader";
 
 function HelpSection() {
     const [formData, setFormData] = useState({
         username: "",
         query: "",
     });
+    const [loaded, setLoaded] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -22,6 +24,7 @@ function HelpSection() {
             ...formData,
             username: user,
         });
+        setLoaded(true);
     }, []);
     const helpSubmitHandler = async e => {
         e.preventDefault();
@@ -41,6 +44,9 @@ function HelpSection() {
         }
     };
 
+    if (!loaded) {
+        return <CircularIndeterminate />;
+    }
     return (
         <>
             <Head>
