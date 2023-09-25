@@ -18,7 +18,8 @@ export default function ProfilePage() {
                 logged ? lawyer ? <LawyerPersonalProfile /> : <UserPersonalProfile /> :
                     <>
                     <Header />
-                    <div className='fixed inset-0 bg-gray-300 flex justify-center items-center'>
+                    <div className='fixed inset-0 bg-gray-300 flex flex-col justify-center items-center'>
+                        <p className='text-black text-xl font-semibold mb-4'>Please Login to Continue to your Profile</p>
                         <LoginButton/>
                     </div>
                     </>
