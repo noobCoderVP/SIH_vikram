@@ -1,7 +1,8 @@
 import React from 'react';
+import { useState } from 'react';
 
 function VerificationComponent({ itemToBeVerified, handlerFunction }) {
-  let verified = true;
+  const [verified, setVerified] = useState(false);
   return (
     <div className="bg-white shadow-lg rounded-lg p-2 mb-2">
       <div className="flex flex-row">
