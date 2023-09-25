@@ -57,8 +57,33 @@ export default function LawyerSearch() {
     };
 
     useEffect(() => {
+        // Add an event listener to listen for messages from the parent window
+        window.addEventListener('message', (event) => {
+          // Check that the message origin is trusted (for security)
+          if (event.origin !== window.origin) {
+            console.log("Error")
+            return;
+          }
+    
+          // Access the data sent from the parent window
+          const data = event.data;
+          setSelectedTypeOfService(data);
+          setSelectedSpecialization(data);
+          // Handle the received data as needed
+          console.log('Received data in the child window:', data);
+        });
+    
+        // Clean up the event listener when the component unmounts
+        return () => {
+          window.removeEventListener('message', null);
+        };
+
+      }, []);
+
+    useEffect(() => {
         fetchLawyerData();
     }, []);
+
     const handleSearch = () => {
 
         console.log(selectedTypeOfService);
