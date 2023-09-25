@@ -1,6 +1,7 @@
 import React from 'react';
 
-function PurchaseHistory() {
+function PurchaseHistory({ desc }) {
+  console.log(desc)
   return (
     <div className="bg-white mt-4 text-black rounded-lg shadow-lg p-6">
       <h2 className="text-2xl font-semibold mb-4">Purchase History</h2>
@@ -12,7 +13,7 @@ function PurchaseHistory() {
           <div className="flex items-center space-x-4">
             <div>
               <h3 className="text-lg font-semibold">Consultation</h3>
-              <p className="text-gray-600">Time: 1hr | Person: Toshan Luktuke</p>
+              <p className="text-gray-600">{desc}</p>
             </div>
           </div>
           <span className="text-green-500 font-semibold">₹3000.0</span>
