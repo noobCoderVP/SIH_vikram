@@ -263,7 +263,7 @@ const Register = () => {
                                 {tierItems.map(item => (
                                     <Select.Option
                                         key={item.key}
-                                        value={item.label}>
+                                        value={item.key}>
                                         {item.label}
                                     </Select.Option>
                                 ))}
