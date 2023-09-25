@@ -5,8 +5,12 @@ import chatbot from "../public/chatbot.jpg";
 import loadingGif from "../public/loading.gif";
 
 import { useEffect, useState } from "react";
+function parseTagsOut(responseText) {
+    return responseText.replace(/\$[^\$]*\$/g, '').replace('$end$', '\n\n');
+}
 
 function LetterByLetterCard({ text }) {
+    text = parseTagsOut(text);
     const [displayText, setDisplayText] = useState("");
     const [index, setIndex] = useState(0);
 
