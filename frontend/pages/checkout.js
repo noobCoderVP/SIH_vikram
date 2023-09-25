@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import LawyerProfile from "@/components/LawyerProfile";
 import { Elements } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";

@@ -11,7 +11,7 @@ import axios from "axios";
 
 export default function Profile({ featuredProduct, newProducts }) {
     const router = useRouter();
-    const [details, setDetails] = useState(null);
+    const [lawyer, setDetails] = useState(null);
 
     const fetchDetails = async username => {
         try {
@@ -43,7 +43,7 @@ export default function Profile({ featuredProduct, newProducts }) {
                 <title>Profile</title>
             </Head>
             <ToastContainer theme="dark" />
-            {details && <LawyerProfile io={io} details={details} />}
+            {lawyer && <LawyerProfile io={io} details={lawyer} />}
         </div>
     );
 }

@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 import LawyerTag from "./LawyerTag";
 import Link from "next/link";
 
-const LawyerCard = lawyer => {
+const LawyerCard = ({ lawyer, renderButton })  => {
     const {
         name,
         type_of_service_tag: typeOfServiceTag,
@@ -20,7 +20,6 @@ const LawyerCard = lawyer => {
     const location = "Mumbai, Maharashtra";
     const imageUrl =
         "https://t4.ftcdn.net/jpg/03/32/59/65/240_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg"; // default for now
-    const renderButton = true;
 
     const renderStars = rating => {
         const starIcons = [];

@@ -23,13 +23,18 @@ const lawyerSchema = mongoose.Schema(
             required: true,
             unique: true,
         },
-        tags: {
+        type_of_service_tag: {
+            type: String,
+            required: true,
+        },
+        specialization_tags: {
             type: [String],
+            required: false,
         },
         tier: {
-            type: String,
-            // min: 1,
-            // max: 5,
+            type: Number,
+            min: 1,
+            max: 5,
         },
         rating: {
             type: Number,

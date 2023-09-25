@@ -6,10 +6,18 @@ import FeedbackCard from "./FeedbackCard";
 import { Rating } from "flowbite-react";
 import ChatButton from "./ChatButton";
 
-const LawyerProfile = props => {
-    const { name, about, experience, rating, tags, tier, username } =
-        props.details;
-    console.log(tags);
+const LawyerProfile = (props) => {
+    const {
+        name,
+        type_of_service_tag: typeOfServiceTag,
+        specialization_tags: specializationTags,
+        tier,
+        rating,
+        about,
+        experience,
+        verified,
+        username,
+    } = props.details;
     const feedbackData = {
         name: "John Doe",
         rating: 4, // You can set the rating from 0 to 5
@@ -92,8 +100,8 @@ const LawyerProfile = props => {
                     {/* Right Column */}
                     <div className="lg:w-1/3">
                         <LawyerCard
-                            key={props._id} // Use a unique identifier from your data as the key
-                            lawyer={props} // Pass the lawyer data as a prop
+                            lawyer={props.details} // Pass the lawyer data as a prop
+                            renderButton={false} // Set renderButton as needed, either true or false
                         />
                     </div>
                 </div>

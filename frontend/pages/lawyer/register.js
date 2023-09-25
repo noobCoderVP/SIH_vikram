@@ -44,6 +44,34 @@ const Register = () => {
         setTier(value);
     }
 
+    // Assuming you have a list of available tags in an array called 'availableTags'
+    const typeOfService = [
+        "Lawyer",
+        "Notary",
+        "Paralegal",
+        "Arbitrator",
+        "Mediator",
+    ];
+    const specialization = [
+        "Commercial",
+        "Corporate",
+        "Criminal",
+        "Civil",
+        "Litigation",
+        "Family",
+        "Accident",
+        "Insurance",
+        "Banking",
+        "Claims",
+        "Supreme Court",
+        "High Court",
+        "District Court",
+        "Form",
+        "Stampduty",
+        "Dispute",
+    ];
+
+
     return (
         <div className="bg-white">
             <Header />
@@ -135,33 +163,56 @@ const Register = () => {
                     </Form.Item>
                 </div>
 
-                {/* Tags */}
+                {/* Type of Service */}
                 <div className="-mt-2">
                     <label
-                        htmlFor="tags"
-                        className="block mb-1 font-normal font-serif text-gray-500">
-                        Tags
+                        htmlFor="type_of_service_tag"
+                        className="block mb-1 font-normal font-serif text-gray-500"
+                    >
+                        Type of Service
                     </label>
                     <Form.Item
-                        name="tags"
+                        name="type_of_service_tag"
                         rules={[
                             {
                                 required: true,
-                                message: "Please select at least one tag!",
+                                message: "Please select a Type of Service!",
                             },
-                        ]}>
+                        ]}
+                    >
+                        <Select
+                            style={{ width: "100%" }}
+                        >
+                            {typeOfService.map(service => (
+                                <Select.Option key={service} value={service}>
+                                    {service}
+                                </Select.Option>
+                            ))}
+                        </Select>
+                    </Form.Item>
+                </div>
+
+                {/* Specialization */}
+                <div className="-mt-2">
+                    <label
+                        htmlFor="specialization_tags"
+                        className="block mb-1 font-normal font-serif text-gray-500"
+                    >
+                        Specialization
+                    </label>
+                    <Form.Item name="specialization_tags">
                         <Select
                             mode="multiple"
                             tagRender={tagRender}
                             defaultValue={[]}
-                            style={{
-                                width: "100%",
-                            }}
-                            options={options.map(option => ({
-                                label: option.value,
-                                value: option.value,
-                            }))}
-                        />
+                            style={{ width: "100%" }}
+                        >
+                            {specialization.map(spec => (
+                                <Select.Option key={spec} value={spec}>
+                                    {spec}
+                                </Select.Option>
+                            ))}
+                        </Select>
                     </Form.Item>
                 </div>
 

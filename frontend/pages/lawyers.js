@@ -109,10 +109,13 @@ export default function LawyerSearch() {
         console.log(selectedTypeOfService);
         console.log(selectedSpecialization);
         console.log("Sort Option:", selectedSortOption);
+        // Ensure selectedSpecialization is an array
+        const selectedSpecializationArray = Array.isArray(selectedSpecialization)
+            ? selectedSpecialization
+            : [selectedSpecialization];
+
         // Construct the API query URL
-        const apiUrl = `http://localhost:5000/api/search?tos=${selectedTypeOfService}&spec=${selectedSpecialization.join(
-            ",",
-        )}&sort=${selectedSortOption}`;
+        const apiUrl = `http://localhost:5000/api/search?tos=${selectedTypeOfService}&spec=${selectedSpecializationArray.join(',')}&sort=${selectedSortOption}`;
 
         // Make the API request using axios.get
         axios
@@ -150,17 +153,18 @@ export default function LawyerSearch() {
                             options={typeOfService}
                             getOptionLabel={option => option}
                             className="w-full p-0 border-none bg-transparent text-black placeholder-gray placeholder-opacity-50"
-                            value={selectedTypeOfService}
+                            value={Array.isArray(selectedTypeOfService) ? selectedTypeOfService : []}
                             onChange={handleTypeOfServiceChange}
                             renderInput={params => (
                                 <TextField
                                     {...params}
                                     variant="outlined"
-                                    label="Find a Legal Service Provider for all your Needs !"
+                                    label="Find a Legal Service Provider for all your Needs!"
                                     placeholder="Begin Typing or Use the Dropdown to Select"
                                 />
                             )}
                         />
+
                         {selectedTypeOfService.length > 0 && (
                             <Autocomplete
                                 multiple
@@ -168,7 +172,7 @@ export default function LawyerSearch() {
                                 options={specialization}
                                 getOptionLabel={option => option}
                                 className="w-full p-0 border-none bg-transparent text-black placeholder-gray placeholder-opacity-50 bg-red-100"
-                                value={selectedSpecialization}
+                                value={Array.isArray(selectedSpecialization) ? selectedSpecialization : []}
                                 onChange={handleSpecializationChange}
                                 renderInput={params => (
                                     <TextField
@@ -179,6 +183,7 @@ export default function LawyerSearch() {
                                     />
                                 )}
                             />
+
                         )}
                         <div className="ml-auto flex space-x-2">
                             {/* Sorting Dropdown */}
@@ -208,6 +213,7 @@ export default function LawyerSearch() {
                             <LawyerCard
                                 key={lawyer._id} // Use a unique identifier from your data as the key
                                 lawyer={lawyer} // Pass the lawyer data as a prop
+                                renderButton={true}
                             />
                         ))}
                     </div>
