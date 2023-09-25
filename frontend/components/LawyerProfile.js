@@ -123,8 +123,8 @@ const LawyerProfile = props => {
                     {/* Right Column */}
                     <div className="lg:w-1/3">
                         <LawyerCard
-                            key={props._id} // Use a unique identifier from your data as the key
-                            lawyer={props} // Pass the lawyer data as a prop
+                            lawyer={props.details} // Pass the lawyer data as a prop
+                            renderButton={false} // Set renderButton as needed, either true or false
                         />
                     </div>
                 </div>
