@@ -20,6 +20,7 @@ const ChatButton = props => {
             </button>
             {isChatboxOpen && (
                 <Chatbox
+                    lawyer={props.username}
                     style={{ zIndex: "5", position: "absolute", left: "0px" }}
                     io={props.io}
                     onClose={closeChatbox}

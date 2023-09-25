@@ -3,41 +3,59 @@ import React, { useState, useEffect } from "react";
 import { MessageList, Input } from "react-chat-elements";
 import "react-chat-elements/dist/main.css";
 import { Button } from "@mui/material";
+import { message } from "antd";
+import axios from "axios";
 
-const Chatbox = ({ onClose, io }) => {
-    const [messages, setMessages] = useState([
-        {
-            position: "right",
-            type: "text",
-            text: "Can you help me out with my case?",
-            date: new Date(2023, 8, 18, 22, 13, 30),
-        },
-        {
-            position: "left",
-            type: "text",
-            text: "Yes sure, what is your case related to?",
-            date: new Date(2023, 8, 19, 22, 13, 30),
-        },
-    ]);
+const Chatbox = ({ onClose, io, lawyer }) => {
+    const [messages, setMessages] = useState([]);
     const [inputText, setInputText] = useState("");
     const [socket, setSocket] = useState(null);
     const [username, setUsername] = useState("unknown");
+
+    const fetchMessages = async username => {
+        const response1 = await axios.get(
+            `http://localhost:5000/chat/user?sender=${username}&receiver=${lawyer}`,
+        );
+        const response2 = await axios.get(
+            `http://localhost:5000/chat/user?sender=${lawyer}&receiver=${username}`,
+        );
+        let messages = [...response1.data.chats, ...response2.data.chats];
+        messages.sort(function (a, b) {
+            return a.createdAt < b.createdAt;
+        });
+        messages = messages.map(message => {
+            if (message.sender == username)
+                return {
+                    position: "right",
+                    type: "text",
+                    text: message.text,
+                    date: message.createdAt,
+                };
+            else
+                return {
+                    position: "left",
+                    type: "text",
+                    text: message.text,
+                    date: message.createdAt,
+                };
+        });
+        setMessages(messages);
+    };
 
     useEffect(() => {
         let user = localStorage.getItem("username");
         setUsername(user);
         const socket = io("http://localhost:5000");
+        fetchMessages(user);
 
         socket.on("CHAT_MESSAGE", msg => {
-            if (msg.username != user) {
-                const newMessage = {
-                    position: "left",
-                    type: "text",
-                    text: msg.message,
-                    date: new Date(),
-                };
-                setMessages([...messages, newMessage]);
-            }
+            const newMessage = {
+                position: "left",
+                type: "text",
+                text: msg.message,
+                date: new Date(),
+            };
+            setMessages([...messages, newMessage]);
         });
 
         setSocket(socket);
@@ -49,18 +67,26 @@ const Chatbox = ({ onClose, io }) => {
         };
     }, []);
 
-    const handleSendMessage = () => {
+    const handleSendMessage = async () => {
         socket.emit("CHAT_MESSAGE", { username, message: inputText });
         if (inputText.trim() !== "") {
-            const newMessage = {
-                position: "right",
-                type: "text",
-                text: inputText,
-                date: new Date(),
-            };
-
-            setMessages([...messages, newMessage]);
-            setInputText("");
+            try {
+                const response = await axios.post(
+                    "http://localhost:5000/chat/",
+                    { sender: username, receiver: lawyer, text: inputText },
+                );
+                const newMessage = {
+                    position: "right",
+                    type: "text",
+                    text: inputText,
+                    date: new Date(),
+                };
+                setMessages([...messages, newMessage]);
+                setInputText("");
+            } catch (error) {
+                message.error("Cannot send message!");
+                console.log(error);
+            }
         }
     };
 
@@ -70,7 +96,7 @@ const Chatbox = ({ onClose, io }) => {
                 <div className="bg-gray-800 text-white py-2 px-4 rounded-t-lg">
                     <div className="grid grid-cols-4">
                         <h2 className="col-span-3 text-xl font-semibold">
-                            Chat with Lawyer
+                            Chat with {lawyer}
                         </h2>
                         <div className="justify-self-end">
                             <button

@@ -12,9 +12,8 @@ function Userlist({ users }) {
                             {
                                 avatar: "https://avatars.githubusercontent.com/u/80540635?v=4",
                                 alt: "kursat_avatar",
-                                title: "Kursat",
-                                subtitle:
-                                    "Why don't we go to the No Way Home movie this weekend ?",
+                                title: user.name,
+                                subtitle: user.message,
                                 date: new Date(),
                                 unread: 3,
                             },
