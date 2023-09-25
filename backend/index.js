@@ -15,6 +15,7 @@ import aiRouter from "./routes/openai.js";
 import helpRouter from "./routes/help.js";
 import lawyerRouter from "./routes/lawyer.js";
 import verifyRouter from "./routes/verify.js";
+import chatRouter from "./routes/chat.js";
 
 // dirname
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -48,6 +49,7 @@ app.use("/help", helpRouter);
 app.use("/lawyer", lawyerRouter);
 app.use("/api", aiRouter);
 app.use("/api", verifyRouter);
+app.use("/chat", chatRouter);
 
 app.get("/", (req, res) => {
     res.status(200).json({ hello: "world" });
@@ -56,12 +58,12 @@ app.get("/", (req, res) => {
 io.on("connection", socket => {
     // handling chats of users
     socket.on("CHAT_MESSAGE", msg => {
-        io.emit("CHAT_MESSAGE", msg);
+        socket.broadcast.emit("CHAT_MESSAGE", msg);
     });
 
     // handling messages related to a case
     socket.on("CASE_MESSAGE", msg => {
-        io.emit("CASE_MESSAGE", msg);
+        socket.broadcast.emit("CHAT_MESSAGE", msg);
     });
 });
 

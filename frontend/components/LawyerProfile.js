@@ -10,7 +10,8 @@ import ChatButton from "./ChatButton";
 import Link from "next/link";
 
 const LawyerProfile = props => {
-    const { name, about, experience, rating, tags, tier } = props.details;
+    const { name, about, experience, rating, tags, tier, username } =
+        props.details;
     console.log(tags);
 
     let stripePromise;
@@ -57,7 +58,7 @@ const LawyerProfile = props => {
                                 {" "}
                                 Talk to Me:{" "}
                             </p>
-                            <ChatButton io={props.io} />
+                            <ChatButton username={username} io={props.io} />
                             <p className="text-xl text-black font-semibold ml-4 mr-4">
                                 {" "}
                                 Checkout:{" "}

@@ -1,23 +1,44 @@
 // src/SearchPage.js
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import LawyerCard from "../components/LawyerCard";
 import Header from "@/components/Header";
 import axios from "axios";
 import { Autocomplete } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Head from "next/head";
+import CircularIndeterminate from "@/components/Loader";
 
 export default function LawyerSearch() {
     // Assuming you have a list of available tags in an array called 'availableTags'
-    const typeOfService = ["Lawyer", "Notary", "Paralegal", "Arbitrator", "Mediator"];
-    const specialization = [
-        "Commercial", "Corporate", "Criminal", "Civil", "Litigation", "Family", "Accident", "Insurance", "Banking", "Claims", "Supreme Court", "High Court", "District Court",
-        "Form", "Stampduty", "Dispute"
+    const typeOfService = [
+        "Lawyer",
+        "Notary",
+        "Paralegal",
+        "Arbitrator",
+        "Mediator",
     ];
-
+    const specialization = [
+        "Commercial",
+        "Corporate",
+        "Criminal",
+        "Civil",
+        "Litigation",
+        "Family",
+        "Accident",
+        "Insurance",
+        "Banking",
+        "Claims",
+        "Supreme Court",
+        "High Court",
+        "District Court",
+        "Form",
+        "Stampduty",
+        "Dispute",
+    ];
 
     const [selectedTypeOfService, setSelectedTypeOfService] = useState([]);
     const [selectedSpecialization, setSelectedSpecialization] = useState([]);
+    const [loaded, setLoaded] = useState(false);
 
     // Function to handle Type of Service selection
     const handleTypeOfServiceChange = (_, newValue) => {
@@ -31,7 +52,7 @@ export default function LawyerSearch() {
 
     const [selectedSortOption, setSelectedSortOption] = useState("rating,desc");
 
-    const handleSortChange = (e) => {
+    const handleSortChange = e => {
         setSelectedSortOption(e.target.value);
     };
 
@@ -54,56 +75,62 @@ export default function LawyerSearch() {
         } catch (error) {
             console.log(error);
         }
+        setLoaded(true);
     };
 
     useEffect(() => {
         // Add an event listener to listen for messages from the parent window
-        window.addEventListener('message', (event) => {
-          // Check that the message origin is trusted (for security)
-          if (event.origin !== window.origin) {
-            console.log("Error")
-            return;
-          }
-    
-          // Access the data sent from the parent window
-          const data = event.data;
-          setSelectedTypeOfService(data);
-          setSelectedSpecialization(data);
-          // Handle the received data as needed
-          console.log('Received data in the child window:', data);
+        window.addEventListener("message", event => {
+            // Check that the message origin is trusted (for security)
+            if (event.origin !== window.origin) {
+                console.log("Error");
+                return;
+            }
+
+            // Access the data sent from the parent window
+            const data = event.data;
+            setSelectedTypeOfService(data);
+            setSelectedSpecialization(data);
+            // Handle the received data as needed
+            console.log("Received data in the child window:", data);
         });
-    
+
         // Clean up the event listener when the component unmounts
         return () => {
-          window.removeEventListener('message', null);
+            window.removeEventListener("message", null);
         };
-
-      }, []);
+    }, []);
 
     useEffect(() => {
         fetchLawyerData();
     }, []);
 
     const handleSearch = () => {
-
         console.log(selectedTypeOfService);
         console.log(selectedSpecialization);
         console.log("Sort Option:", selectedSortOption);
         // Construct the API query URL
-        const apiUrl = `http://localhost:5000/api/search?tos=${selectedTypeOfService}&spec=${selectedSpecialization.join(',')}&sort=${selectedSortOption}`;
+        const apiUrl = `http://localhost:5000/api/search?tos=${selectedTypeOfService}&spec=${selectedSpecialization.join(
+            ",",
+        )}&sort=${selectedSortOption}`;
 
         // Make the API request using axios.get
-        axios.get(apiUrl)
-            .then((response) => {
+        axios
+            .get(apiUrl)
+            .then(response => {
                 // Handle the API response here
-                console.log('API Response:', response.data);
+                console.log("API Response:", response.data);
                 setLawyerData(response.data.lawyers);
             })
-            .catch((error) => {
+            .catch(error => {
                 // Handle any errors that occur during the API call
-                console.error('API Error:', error);
+                console.error("API Error:", error);
             });
     };
+
+    if (!loaded) {
+        return <CircularIndeterminate />;
+    }
 
     return (
         <>
@@ -121,11 +148,11 @@ export default function LawyerSearch() {
                             multiple
                             id="tags-outlined"
                             options={typeOfService}
-                            getOptionLabel={(option) => option}
+                            getOptionLabel={option => option}
                             className="w-full p-0 border-none bg-transparent text-black placeholder-gray placeholder-opacity-50"
                             value={selectedTypeOfService}
                             onChange={handleTypeOfServiceChange}
-                            renderInput={(params) => (
+                            renderInput={params => (
                                 <TextField
                                     {...params}
                                     variant="outlined"
@@ -139,11 +166,11 @@ export default function LawyerSearch() {
                                 multiple
                                 id="specialization-tags-outlined"
                                 options={specialization}
-                                getOptionLabel={(option) => option}
+                                getOptionLabel={option => option}
                                 className="w-full p-0 border-none bg-transparent text-black placeholder-gray placeholder-opacity-50 bg-red-100"
                                 value={selectedSpecialization}
                                 onChange={handleSpecializationChange}
-                                renderInput={(params) => (
+                                renderInput={params => (
                                     <TextField
                                         {...params}
                                         variant="outlined"
@@ -158,10 +185,11 @@ export default function LawyerSearch() {
                             <select
                                 className="bg-white text-blue-500 px-3 py-1 rounded-md hover:bg-blue-100"
                                 value={selectedSortOption}
-                                onChange={handleSortChange}
-                            >
-                                {sortOptions.map((option) => (
-                                    <option key={option.value} value={option.value}>
+                                onChange={handleSortChange}>
+                                {sortOptions.map(option => (
+                                    <option
+                                        key={option.value}
+                                        value={option.value}>
                                         {option.label}
                                     </option>
                                 ))}
@@ -174,10 +202,9 @@ export default function LawyerSearch() {
                         </button>
                     </div>
 
-
                     {/* Lawyer Card Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {lawyerData.map((lawyer) => (
+                        {lawyerData.map(lawyer => (
                             <LawyerCard
                                 key={lawyer._id} // Use a unique identifier from your data as the key
                                 lawyer={lawyer} // Pass the lawyer data as a prop
