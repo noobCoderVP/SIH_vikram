@@ -89,6 +89,11 @@ const Header = props => {
                             </Link>
                         </li>
 
+                        <li className="text-black hover:underline" >
+                            {logged ? <Link href="/profile"> Profile </Link> : null}
+                        </li>
+
+
                         {/* Identify user and lawyer */}
                         {!(type == "lawyer") && (
                             <li>
@@ -104,6 +109,7 @@ const Header = props => {
                                 />
                             </li>
                         )}
+                        
                         <li className="">
                             {logged ? <LogoutButton /> : <LoginButton />}
                         </li>

@@ -1,16 +1,29 @@
-import { Inter } from "next/font/google";
-import LawyerProfile from "@/components/LawyerProfile";
-import { io } from "socket.io-client";
-import Head from "next/head";
-import Header from "@/components/Header";
+import React from 'react';
+import LawyerPersonalProfile from '@/components/LawyerPersonalProfile';
+import "react-chat-elements/dist/main.css"
+import CaseTable from '@/components/CaseTable';
+import Header from '@/components/Header';
+import { Footer } from 'flowbite-react';
+import Link from 'next/link';
+import UserPersonalProfile from '@/components/UserPersonalProfile';
+import LoginButton from '@/components/LoginButton';
+import Head from 'next/head';
 
-export default function Profile({ featuredProduct, newProducts }) {
+export default function ProfilePage() {
+    const lawyer = false;
+    const logged = false;
     return (
-        <div>
-            <Header />
-            <Head>
-                <title>Profile</title>
-            </Head>
-        </div>
+        <>
+            {
+                logged ? lawyer ? <LawyerPersonalProfile /> : <UserPersonalProfile /> :
+                    <>
+                    <Header />
+                    <div className='fixed inset-0 bg-gray-300 flex justify-center items-center'>
+                        <LoginButton/>
+                    </div>
+                    </>
+            }
+            <Footer />
+        </>
     );
 }
