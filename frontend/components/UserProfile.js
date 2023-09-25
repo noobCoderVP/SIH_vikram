@@ -6,6 +6,7 @@ import Header from './Header';
 import IncentivesSection from './IncentivesSection';
 import DocumentUpload from './DocumentUpload';
 import VerificationComponent from './VerificationComponent';
+import IncentiveProgress from './IncentiveProgress';
 
 function UserProfile() {
   // Placeholder user data
@@ -67,6 +68,8 @@ function UserProfile() {
 
             </div>
             <IncentivesSection />
+            <IncentiveProgress goal="Receive 5% more recommendations" requirements="Have 10 solved cases with more than a 4 star rating" progress="50" />
+
           </div>
 
           <div className="col-span-3">
