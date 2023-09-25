@@ -24,6 +24,7 @@ export const tagRender = (props) => {
 
     return (
       <Tag
+        className="bg-gray-500"
         color={option ? option.color : 'default-color'} // Use the specified color or a default color
         closable={closable}
         onClose={onClose}
@@ -61,19 +62,19 @@ export const experienceItems = [
 export const tierItems = [
     {
       label: 'Platinum',
-      key: '4', 
+      key: 4, 
     },
     {
       label: 'Gold',
-      key: '3',
+      key: 3,
     },
     {
       label: 'Silver',
-      key: '2',
+      key: 2,
     },
     ,
     {
       label: 'Bronze',
-      key: '1',
+      key: 1,
     },
   ];
