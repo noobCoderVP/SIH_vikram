@@ -9,12 +9,14 @@ import SearchResults from "@/components/SearchResults";
 import LetterByLetterCard from "@/components/LetterByLetterCard";
 import PortalToLegalButton from "@/components/PortalToLegalButton";
 import TagSection from "@/components/TagSection";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LawyerRegistration from "@/components/LawyerRegistration";
 import Head from "next/head";
+import CircularIndeterminate from "@/components/Loader";
 
 export default function HomePage() {
     const [searched, setSearched] = useState(false);
+    const [loaded, setLoaded] = useState(false);
     const updateSearched = newValue => {
         setSearched(newValue);
     };
@@ -22,10 +24,16 @@ export default function HomePage() {
     const [aiResponse, setAiResponse] = useState(
         // "Please give a well-framed query for the legal services you need to our AI and it will find you a solution and the best providers on our website for the same ! ",
         "",
-        );
+    );
     // const updateSearched = newValue => {
     //     setSearched(newValue);
     // };
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoaded(true);
+        }, 500);
+    }, []);
 
     const chipData = [
         "Chip 1",
@@ -36,6 +44,8 @@ export default function HomePage() {
         "Chip 6",
         // Add more chip labels as needed
     ];
+
+    if (!loaded) return <CircularIndeterminate />;
 
     return (
         <>

@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Head from "next/head";
 import Header from "@/components/Header";
+import { Form, Input } from "antd";
 
 const LoginPage = () => {
     const [activeTab, setActiveTab] = useState("login");
@@ -23,7 +24,7 @@ const LoginPage = () => {
     };
 
     const handleLoginSubmit = async e => {
-        e.preventDefault();
+        // e.preventDefault();
         try {
             const response = await axios.post(
                 "http://localhost:5000/user/login",
@@ -47,7 +48,8 @@ const LoginPage = () => {
     };
 
     const handleRegistrationSubmit = async e => {
-        e.preventDefault();
+        // commented e.prevent_default
+        // e.preventDefault();
         // Implement your registration logic here using registrationData
         try {
             const response = await axios.post(
@@ -73,177 +75,312 @@ const LoginPage = () => {
             </Head>
             <Header />
             <ToastContainer />
-            <div className="min-h-screen flex items-center justify-center bg-gray-100">
-                <div className="bg-white p-8 rounded-lg shadow-lg">
+            <div className="min-h-screen  flex items-center justify-center bg-gray-100">
+                <div className="bg-white w-96 p-8 rounded-lg shadow-lg">
                     <div className="mb-4">
                         <ul className="flex border-b">
                             <li
-                                className={`mr-1 cursor-pointer ${
-                                    activeTab === "login"
+                                className={`mr-1 cursor-pointer ${activeTab === "login"
                                         ? "border-indigo-500 text-indigo-600"
                                         : "border-gray-300"
-                                }`}
+                                    }`}
                                 onClick={() => handleTabClick("login")}>
                                 <button
-                                    className={`bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold ${
-                                        activeTab === "login"
+                                    className={`bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold ${activeTab === "login"
                                             ? "bg-white"
                                             : "bg-gray-100"
-                                    }`}>
+                                        }`}>
                                     Login
                                 </button>
                             </li>
                             <li
-                                className={`cursor-pointer ${
-                                    activeTab === "register"
+                                className={`cursor-pointer ${activeTab === "register"
                                         ? "border-indigo-500 text-indigo-600"
                                         : "border-gray-300"
-                                }`}
+                                    }`}
                                 onClick={() => handleTabClick("register")}>
                                 <button
-                                    className={`bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold ${
-                                        activeTab === "register"
+                                    className={`bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold ${activeTab === "register"
                                             ? "bg-white"
                                             : "bg-gray-100"
-                                    }`}>
+                                        }`}>
                                     Register
                                 </button>
                             </li>
                         </ul>
                     </div>
 
+                    {/* Login Page */}
                     {activeTab === "login" && (
-                        <form
-                            onSubmit={handleLoginSubmit}
-                            className="text-black">
-                            <h2 className="text-black text-2xl font-semibold mb-4">
-                                Login
-                            </h2>
-                            <div className="mb-4">
-                                <input
-                                    type="text"
-                                    minLength={5}
-                                    placeholder="Username"
-                                    className="w-full p-2 border border-gray-300 rounded"
-                                    value={loginData.username}
-                                    onChange={e =>
-                                        setLoginData({
-                                            ...loginData,
-                                            username: e.target.value,
-                                        })
-                                    }
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <input
-                                    type="password"
-                                    placeholder="Password"
-                                    className="w-full p-2 border border-gray-300 rounded"
-                                    value={loginData.password}
-                                    onChange={e =>
-                                        setLoginData({
-                                            ...loginData,
-                                            password: e.target.value,
-                                        })
-                                    }
-                                />
-                            </div>
-                            <div className="mb-4 text-blue-600 text-right">
-                                <a href="#">Forgot Password?</a>
-                            </div>
-                            <div className="flex justify-end">
-                                <button
-                                    type="submit"
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg mr-2">
+                        <Form
+                            name="basic"
+                            className="m-auto w-full max-w-sm p-4 bg-white border border-gray-200 shadow sm:p-6 md:p-6"
+                            initialValues={{ remember: true }}
+                            onFinish={handleLoginSubmit}
+                            autoComplete="off"
+                        >
+                            <div className="border-b-2 pb-3 flex justify-between items-center">
+                                <h1 className="text-lg font-semibold text-gray-500">
                                     Login
-                                </button>
+                                </h1>
                             </div>
-                        </form>
+
+                            <div className="mb-4 mt-4">
+                                <label
+                                    htmlFor="username"
+                                    className="block mb-1 font-normal font-serif text-gray-500"
+                                >
+                                    Username
+                                </label>
+                                <Form.Item
+                                    name="username"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: "Please input your username!",
+                                        },
+                                    ]}
+                                >
+                                    <Input
+                                        type="text"
+                                        className="w-full p-2 border border-gray-300 rounded leading-5 placeholder-font"
+                                        placeholder="Username"
+                                        autoFocus
+                                        value={loginData.username}
+                                        onChange={(e) =>
+                                            setLoginData({
+                                                ...loginData,
+                                                username: e.target.value,
+                                            })
+                                        }
+                                    />
+                                </Form.Item>
+                            </div>
+
+                            <div className="-mt-2">
+                                <label
+                                    htmlFor="password"
+                                    className="block mb-1 font-normal font-serif text-gray-500"
+                                >
+                                    Password
+                                </label>
+                                <Form.Item
+                                    name="password"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: "Please input your password!",
+                                        },
+                                    ]}
+                                >
+                                    <Input.Password
+                                        className="w-full p-2 border border-gray-300 rounded leading-5 placeholder-font focus:ring-2 focus:ring-blue-500"
+                                        placeholder="Password"
+                                        value={loginData.password}
+                                        onChange={(e) =>
+                                            setLoginData({
+                                                ...loginData,
+                                                password: e.target.value,
+                                            })
+                                        }
+                                    />
+                                </Form.Item>
+                            </div>
+
+                            <div className="flex justify-end">
+                                <Form.Item className="text-center">
+                                    <button
+                                        type="submit"
+                                        className="bg-blue-700 hover:bg-blue-900 text-white font-semibold py-2 px-4 rounded-lg"
+                                    >
+                                        Login
+                                    </button>
+                                </Form.Item>
+                            </div>
+                        </Form>
+
                     )}
 
                     {activeTab === "register" && (
-                        <form onSubmit={handleRegistrationSubmit}>
-                            <h2 className=" text-black text-2xl font-semibold mb-4">
-                                Register
-                            </h2>
-                            <div className="text-black mb-4">
-                                <input
-                                    type="text"
-                                    placeholder="Username"
-                                    className="w-full p-2 border border-gray-300 rounded"
-                                    value={registrationData.username}
-                                    onChange={e =>
-                                        setRegistrationData({
-                                            ...registrationData,
-                                            username: e.target.value,
-                                        })
-                                    }
-                                />
-                            </div>
-                            <div className="text-black mb-4">
-                                <input
-                                    type="text"
-                                    placeholder="Name"
-                                    className="w-full p-2 border border-gray-300 rounded"
-                                    value={registrationData.name}
-                                    onChange={e =>
-                                        setRegistrationData({
-                                            ...registrationData,
-                                            name: e.target.value,
-                                        })
-                                    }
-                                />
-                            </div>
-                            <div className="text-black mb-4">
-                                <input
-                                    type="password"
-                                    placeholder="Password"
-                                    className="w-full p-2 border border-gray-300 rounded"
-                                    value={registrationData.password}
-                                    onChange={e =>
-                                        setRegistrationData({
-                                            ...registrationData,
-                                            password: e.target.value,
-                                        })
-                                    }
-                                />
-                            </div>
-                            <div className="text-black mb-4">
-                                <input
-                                    type="text"
-                                    placeholder="Email"
-                                    className="w-full p-2 border border-gray-300 rounded"
-                                    value={registrationData.email}
-                                    onChange={e =>
-                                        setRegistrationData({
-                                            ...registrationData,
-                                            email: e.target.value,
-                                        })
-                                    }
-                                />
-                            </div>
-                            <div className="text-black mb-4">
-                                <input
-                                    type="text"
-                                    placeholder="Phone Number"
-                                    className="w-full p-2 border border-gray-300 rounded"
-                                    value={registrationData.number}
-                                    onChange={e =>
-                                        setRegistrationData({
-                                            ...registrationData,
-                                            number: e.target.value,
-                                        })
-                                    }
-                                />
-                            </div>
-                            <div className="flex justify-end">
-                                <button
-                                    type="submit"
-                                    className="bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg mr-2">
+                        <Form
+                            name="basic"
+                            className="m-auto w-full max-w-sm p-4 bg-white border border-gray-200 shadow sm:p-6 md:p-6"
+                            onFinish={handleRegistrationSubmit}
+                            autoComplete="off"
+                        >
+                            <div className="border-b-2 pb-3 flex justify-between items-center">
+                                <h1 className="text-lg font-semibold text-gray-500">
                                     Register
-                                </button>
+                                </h1>
                             </div>
-                        </form>
+
+                            <div className="mb-4 mt-2">
+                                <label
+                                    htmlFor="username"
+                                    className="block mb-1 font-normal font-serif text-gray-500"
+                                >
+                                    Username
+                                </label>
+                                <Form.Item
+                                    name="username"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: "Please input your username!",
+                                        },
+                                    ]}
+                                >
+                                    <Input
+                                        type="text"
+                                        className="w-full p-2 border border-gray-300 rounded leading-5 placeholder-font"
+                                        placeholder="Username"
+                                        value={registrationData.username}
+                                        onChange={(e) =>
+                                            setRegistrationData({
+                                                ...registrationData,
+                                                username: e.target.value,
+                                            })
+                                        }
+                                    />
+                                </Form.Item>
+                            </div>
+
+                            <div className="-mt-4">
+                                <label
+                                    htmlFor="name"
+                                    className="block mb-1 font-normal font-serif text-gray-500"
+                                >
+                                    Name
+                                </label>
+                                <Form.Item
+                                    name="name"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: "Please input your name!",
+                                        },
+                                    ]}
+                                >
+                                    <Input
+                                        type="text"
+                                        className="w-full p-2 border border-gray-300 rounded leading-5 placeholder-font"
+                                        placeholder="Name"
+                                        value={registrationData.name}
+                                        onChange={(e) =>
+                                            setRegistrationData({
+                                                ...registrationData,
+                                                name: e.target.value,
+                                            })
+                                        }
+                                    />
+                                </Form.Item>
+                            </div>
+
+                            <div className="-mt-4">
+                                <label
+                                    htmlFor="password"
+                                    className="block mb-1 font-normal font-serif text-gray-500"
+                                >
+                                    Password
+                                </label>
+                                <Form.Item
+                                    name="password"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: "Please input your password!",
+                                        },
+                                    ]}
+                                >
+                                    <Input.Password
+                                        className="w-full p-2 border border-gray-300 rounded leading-5 placeholder-font focus:ring-2 focus:ring-blue-500"
+                                        placeholder="Password"
+                                        value={registrationData.password}
+                                        onChange={(e) =>
+                                            setRegistrationData({
+                                                ...registrationData,
+                                                password: e.target.value,
+                                            })
+                                        }
+                                    />
+                                </Form.Item>
+                            </div>
+
+                            <div className="-mt-4">
+                                <label
+                                    htmlFor="email"
+                                    className="block mb-1 font-normal font-serif text-gray-500"
+                                >
+                                    Email
+                                </label>
+                                <Form.Item
+                                    name="email"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            type: "email",
+                                            message: "Please input a valid email address!",
+                                        },
+                                    ]}
+                                >
+                                    <Input
+                                        type="text"
+                                        className="w-full p-2 border border-gray-300 rounded leading-5 placeholder-font"
+                                        placeholder="Email"
+                                        value={registrationData.email}
+                                        onChange={(e) =>
+                                            setRegistrationData({
+                                                ...registrationData,
+                                                email: e.target.value,
+                                            })
+                                        }
+                                    />
+                                </Form.Item>
+                            </div>
+
+                            <div className="-mt-4">
+                                <label
+                                    htmlFor="number"
+                                    className="block mb-1 font-normal font-serif text-gray-500"
+                                >
+                                    Phone Number
+                                </label>
+                                <Form.Item
+                                    name="number"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: "Please input your phone number!",
+                                        },
+                                    ]}
+                                >
+                                    <Input
+                                        type="text"
+                                        className="w-full p-2 border border-gray-300 rounded leading-5 placeholder-font"
+                                        placeholder="Phone Number"
+                                        value={registrationData.number}
+                                        onChange={(e) =>
+                                            setRegistrationData({
+                                                ...registrationData,
+                                                number: e.target.value,
+                                            })
+                                        }
+                                    />
+                                </Form.Item>
+                            </div>
+
+                            <div className=" flex justify-end">
+                                <Form.Item className="text-center ">
+                                    <button
+                                        type="submit"
+                                        className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg"
+                                    >
+                                        Register
+                                    </button>
+                                </Form.Item>
+                            </div>
+                        </Form>
+
                     )}
                 </div>
             </div>
