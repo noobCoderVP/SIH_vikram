@@ -75,7 +75,7 @@ function cases() {
                         <h1 className="text-2xl">
                             Register a new case with a client
                         </h1>
-                        <Link href="/cases/register">
+                        <Link href="/case/register">
                             <Button
                                 variant="contained"
                                 color="primary"

@@ -8,6 +8,7 @@ const caseSchema = mongoose.Schema(
             unique: true,
         },
         title: { type: String, required: true },
+        tags: [String],
         client: {
             type: String,
             required: true,
@@ -16,6 +17,9 @@ const caseSchema = mongoose.Schema(
             type: String,
             required: true,
         },
+        cemail: String,
+        lemail: String,
+        description: String,
         documents: [mongoose.SchemaTypes.ObjectId],
         stage: {
             type: Number,

@@ -16,6 +16,7 @@ import helpRouter from "./routes/help.js";
 import lawyerRouter from "./routes/lawyer.js";
 import verifyRouter from "./routes/verify.js";
 import chatRouter from "./routes/chat.js";
+import caseRouter from "./routes/case.js";
 
 // dirname
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -50,6 +51,7 @@ app.use("/lawyer", lawyerRouter);
 app.use("/api", aiRouter);
 app.use("/api", verifyRouter);
 app.use("/chat", chatRouter);
+app.use("/case", caseRouter);
 
 app.get("/", (req, res) => {
     res.status(200).json({ hello: "world" });
