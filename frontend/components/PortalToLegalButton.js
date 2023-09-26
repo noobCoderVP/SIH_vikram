@@ -20,16 +20,20 @@ function parseTags(responseText) {
 function PortalToLegalButton({ text }) {
     const [selectedTags, setSelectedTags] = useState({ typeOfService: [], specialization: [] });
 
-    function handleClick() {
+    // Parse the tags and set selectedTags
+    const tags = parseTags(text);
+    const data = tags.typeOfService;
+    console.log("before sending", data);
 
-        // Parse the tags and set selectedTags
+    function handleClick() {
         const tags = parseTags(text);
-         // takes you to the lawyer page
-        // window.location.href = "http://localhost:3000/lawyers";
-        const newWindow = window.open('http://localhost:3000/lawyers', '_self');
-    
-        // Send data to the new window using postMessage
-        newWindow.postMessage(tags.typeOfService, '*');
+        localStorage.setItem("selectedTags", JSON.stringify(tags.typeOfService));
+        // window.location.href = "/lawyers";
+        // takes you to the lawyer page
+        window.location.href = "http://localhost:3000/lawyers";
+        // const newWindow = window.open('http://localhost:3000/lawyers', '_self');
+        // // Send data to the new window using postMessage
+        // newWindow.postMessage(data, '*');
     };
     return (
         <div className="w-full mx-auto py-4 px-8 flex items-center bg-white rounded-lg shadow-lg">
