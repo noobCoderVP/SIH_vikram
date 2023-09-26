@@ -2,32 +2,40 @@ import React, { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import { Button } from "@mui/material";
 import Link from "next/link";
+import axios from "axios";
 import { DataGrid } from "@mui/x-data-grid";
 
 function cases() {
     const [type, setType] = useState("");
+    const [ongoingData, setOngoingData] = useState([]);
+    const [pastData, setPastData] = useState([]);
     useEffect(() => {
         setType(localStorage.getItem("type"));
     }, []);
-    let columns = [];
-    columns = [
-        { field: "id", headerName: "ID", width: 100 },
-        { field: "client", headerName: "Client name", width: 130 },
-        { field: "lawyer", headerName: "Lawyer name", width: 130 },
-        { field: "title", headerName: "Case title", width: 200 },
-        { field: "stage", headerName: "Current stage", width: 100 },
-        { field: "payment", headerName: "Payment in INR", width: 130 },
+    let columns = [
         {
-            field: "chat",
-            headerName: "Chat Link",
-            type: "string",
+            field: "caseId",
+            headerName: "Case Link",
+            renderCell: params => {
+                return (
+                    <Link
+                        className="text-white bg-blue-500 p-1"
+                        href={`/case/${params.caseId}`}>
+                        {params.value}
+                    </Link>
+                );
+            },
             width: 120,
         },
+        { field: "client", headerName: "Client Name", width: 130 },
+        { field: "lawyer", headerName: "Lawyer Name", width: 130 },
+        { field: "title", headerName: "Case title", width: 200 },
     ];
 
     let rows = [
         {
             id: 10000,
+            caseId: 10000,
             client: "vaibhav",
             lawyer: "toshan",
             title: "divorce with wife",
@@ -37,6 +45,7 @@ function cases() {
         },
         {
             id: 10008,
+            caseId: 10008,
             client: "vaibhav",
             lawyer: "toshan",
             title: "purjery case on wife",
@@ -46,6 +55,7 @@ function cases() {
         },
         {
             id: 10200,
+            caseId: 10200,
             client: "vaibhav",
             lawyer: "toshan",
             title: "Theft case",
@@ -90,6 +100,7 @@ function cases() {
                 </section>
                 <div style={{ height: 400, width: "100%" }}>
                     <DataGrid
+                        rowSelection={false}
                         rows={rows}
                         columns={columns}
                         initialState={{
@@ -98,7 +109,6 @@ function cases() {
                             },
                         }}
                         pageSizeOptions={[5, 10]}
-                        checkboxSelection
                     />
                 </div>
                 <section className="bg-white text-black p-4  w-max">
@@ -114,7 +124,6 @@ function cases() {
                             },
                         }}
                         pageSizeOptions={[5, 10]}
-                        checkboxSelection
                     />
                 </div>
             </div>
