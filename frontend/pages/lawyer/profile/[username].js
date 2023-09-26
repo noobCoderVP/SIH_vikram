@@ -8,10 +8,12 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import CircularIndeterminate from "@/components/Loader";
 
 export default function Profile({ featuredProduct, newProducts }) {
     const router = useRouter();
     const [lawyer, setDetails] = useState(null);
+    const [loaded, setLoaded] = useState(false);
 
     const fetchDetails = async username => {
         try {
@@ -20,6 +22,7 @@ export default function Profile({ featuredProduct, newProducts }) {
             );
             if (response.data.status) {
                 setDetails(response.data.data);
+                setLoaded(true);
             } else {
                 router.push("/error");
             }
@@ -36,6 +39,8 @@ export default function Profile({ featuredProduct, newProducts }) {
             } catch (error) {}
         }
     }, [router]);
+
+    if (!loaded) return <CircularIndeterminate />;
     return (
         <div>
             <Header />

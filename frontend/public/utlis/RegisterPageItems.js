@@ -24,6 +24,7 @@ export const tagRender = (props) => {
 
     return (
       <Tag
+        className="bg-gray-500"
         color={option ? option.color : 'default-color'} // Use the specified color or a default color
         closable={closable}
         onClose={onClose}
