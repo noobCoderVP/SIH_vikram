@@ -118,6 +118,24 @@ const LawyerProfile = props => {
                                 </Rating.Advanced>
                             </div>
                         </div>
+
+                        <div>
+                            {/* Submit Feedback */}
+                            <h2 className="text-xl font-semibold mb-4">
+                                Submit Feedback
+                            </h2>
+                            <form className="flex flex-col">
+                                <input className="mb-2" type="number" placeholder="Please enter a rating between 1 and 5"></input>
+                                <textarea
+                                    className="border-2 border-gray-300 p-2 mb-4"
+                                    placeholder="Write your feedback here"
+                                />
+                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                                    Submit
+                                </button>
+                            </form>
+                        </div>
+
                     </div>
 
                     {/* Right Column */}

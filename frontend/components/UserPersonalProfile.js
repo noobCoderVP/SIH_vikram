@@ -14,9 +14,9 @@ import PurchaseHistory from './PurchaseHistory';
 function UserPersonalProfile() {
   // Placeholder user data
   const userData = {
-    name: 'John Doe',
+    name: 'Vaibhav Patel',
     phoneNumber: '123-456-7890',
-    email: 'johndoe@example.com',
+    email: 'vaibhav@example.com',
   };
 
   // Placeholder active cases data
@@ -72,7 +72,7 @@ function UserPersonalProfile() {
             </div>
             {/* <IncentivesSection /> */}
             {/* <IncentiveProgress goal="Receive 5% more recommendations" requirements="Have 10 solved cases with more than a 4 star rating" progress="50" /> */}
-            <PurchaseHistory />
+            <PurchaseHistory desc={"Time: 1hr | Person: Toshan Luktuke"}/>
           </div>
 
           <div className="col-span-3">

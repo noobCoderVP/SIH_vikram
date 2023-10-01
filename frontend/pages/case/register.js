@@ -6,6 +6,7 @@ import { DatePicker, InputNumber } from "antd";
 import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import axios from "axios";
 import {
     Button as ButtonAnt,
     Form,
@@ -37,16 +38,16 @@ export default function HorizontalNonLinearStepper() {
     const [activeStep, setActiveStep] = React.useState(0);
     const [completed, setCompleted] = React.useState({});
 
-    const onFinish = async values => {
+    const onFinishComplete = async values => {
         // For POST Request
         try {
             const response = await axios.post(
-                "http://localhost:5000/lawyer/register",
-                values,
+                "http://localhost:5000/case/register/",
+                { ...values, caseId: 1000 },
             );
             if (response.data.status) {
                 message.success(response.data.message);
-                router.push("/lawyer/login");
+                setActiveStep(activeStep => activeStep + 1);
             } else {
                 message.error(response.data.message);
             }
@@ -150,9 +151,9 @@ export default function HorizontalNonLinearStepper() {
                                     name="basic"
                                     className="m-auto w-full max-w-sm p-4 bg-white border border-gray-200 shadow sm:p-6 md:p-6"
                                     initialValues={{ remember: true }}
-                                    onFinish={onFinish}
+                                    onFinish={onFinishComplete}
                                     onFinishFailed={onFinishFailed}
-                                    autoComplete="off">
+                                    autoComplete="on">
                                     {/* Join NyayBazaar Part */}
                                     <div className="border-b-2 pb-3 flex justify-between items-center">
                                         <h1 className="text-lg font-semibold text-gray-500">
@@ -251,6 +252,7 @@ export default function HorizontalNonLinearStepper() {
                                                 defaultValue={[]}
                                                 style={{
                                                     width: "100%",
+                                                    backgroundColor: "white",
                                                 }}
                                                 options={options.map(
                                                     option => ({
@@ -310,29 +312,6 @@ export default function HorizontalNonLinearStepper() {
                                         </Form.Item>
                                     </div>
 
-                                    {/* Password */}
-                                    <div className="-mt-2">
-                                        <label
-                                            htmlFor="password"
-                                            className="block mb-1 font-normal font-serif text-gray-500">
-                                            Password
-                                        </label>
-                                        <Form.Item
-                                            name="password"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message:
-                                                        "Please input your password!",
-                                                },
-                                            ]}>
-                                            <Input.Password
-                                                className="rounded-lg focus:ring-2 focus:ring-blue-500"
-                                                placeholder="Account Password"
-                                            />
-                                        </Form.Item>
-                                    </div>
-
                                     {/* About */}
                                     <div>
                                         <label
@@ -341,7 +320,7 @@ export default function HorizontalNonLinearStepper() {
                                             Description
                                         </label>
                                         <Form.Item
-                                            name="about"
+                                            name="description"
                                             rules={[
                                                 {
                                                     required: true,
@@ -355,6 +334,13 @@ export default function HorizontalNonLinearStepper() {
                                             />
                                         </Form.Item>
                                     </div>
+                                    <Form.Item className="text-center mt-4">
+                                        <ButtonAnt
+                                            color="secondary"
+                                            htmlType="submit">
+                                            Register
+                                        </ButtonAnt>
+                                    </Form.Item>
                                 </Form>
                             )}
                             {activeStep == 1 && (
@@ -364,7 +350,7 @@ export default function HorizontalNonLinearStepper() {
                                         name="basic"
                                         className="mt-6 m-auto w-full max-w-sm p-4 bg-white border border-gray-200 shadow sm:p-6 md:p-6"
                                         initialValues={{ remember: true }}
-                                        onFinish={onFinish}
+                                        // onFinish={onFinish}
                                         onFinishFailed={onFinishFailed}
                                         autoComplete="off">
                                         {/* Upload Documents */}
@@ -471,7 +457,7 @@ export default function HorizontalNonLinearStepper() {
                                         name="payments"
                                         className="mt-6 m-auto w-full max-w-sm p-4 bg-white border border-gray-200 shadow sm:p-6 md:p-6"
                                         initialValues={{ remember: true }}
-                                        onFinish={onFinish}
+                                        // onFinish={onFinish}
                                         onFinishFailed={onFinishFailed}
                                         autoComplete="off">
                                         {/* Payments */}
@@ -523,7 +509,7 @@ export default function HorizontalNonLinearStepper() {
                                     </Form>
                                 </div>
                             )}
-                            <Box
+                            {/* <Box
                                 sx={{
                                     display: "flex",
                                     flexDirection: "row",
@@ -553,10 +539,10 @@ export default function HorizontalNonLinearStepper() {
                                             {completedSteps() ===
                                             totalSteps() - 1
                                                 ? "Finish"
-                                                : "Complete Step"}
+                                                : "Submit"}
                                         </Button>
                                     ))}
-                            </Box>
+                            </Box> */}
                         </React.Fragment>
                     )}
                 </div>

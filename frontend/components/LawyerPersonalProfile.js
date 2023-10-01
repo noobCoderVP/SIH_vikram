@@ -13,9 +13,9 @@ import PurchaseHistory from './PurchaseHistory';
 function LawyerPersonalProfile() {
   // Placeholder user data
   const userData = {
-    name: 'John Doe',
+    name: 'Toshan Luktuke',
     phoneNumber: '123-456-7890',
-    email: 'johndoe@example.com',
+    email: 'toshan@example.com',
   };
 
   // Placeholder active cases data
@@ -84,7 +84,7 @@ function LawyerPersonalProfile() {
 
             <CaseTable />
 
-            <PurchaseHistory />
+            <PurchaseHistory desc={"Time: 1hr | Person: Vaibhav Patel"}/>
 
           </div>
         </div>

@@ -87,7 +87,7 @@ function Chats() {
         let messages = messageHash[active];
         if (messages) {
             messages.sort(function (a, b) {
-                return a.createdAt < b.createdAt;
+                return a.createdAt > b.createdAt;
             });
             messages = messages.map(message => {
                 if (message.sender == username)

@@ -4,7 +4,7 @@ const Footer = () => {
     return (
         <footer className="bg-white dark:bg-gray-900">
             <div className="mx-auto w-full max-w-screen-xl">
-                <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
+                <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-3">
                     <div>
                         <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
                             Company
@@ -81,7 +81,7 @@ const Footer = () => {
                             </li>
                         </ul>
                     </div>
-                    <div>
+                    {/* <div>
                         <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
                             Download
                         </h2>
@@ -107,7 +107,7 @@ const Footer = () => {
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <p className="text-center py-2 bg-blue-500 text-white">
