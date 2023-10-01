@@ -1,12 +1,12 @@
 // src/SearchPage.js
-import React, { useState, useEffect } from "react";
-import LawyerCard from "../components/LawyerCard";
 import Header from "@/components/Header";
-import axios from "axios";
+import CircularIndeterminate from "@/components/Loader";
 import { Autocomplete } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import axios from "axios";
 import Head from "next/head";
-import CircularIndeterminate from "@/components/Loader";
+import { useEffect, useState } from "react";
+import LawyerCard from "../components/LawyerCard";
 
 export default function LawyerSearch() {
     // Assuming you have a list of available tags in an array called 'availableTags'
@@ -78,48 +78,57 @@ export default function LawyerSearch() {
         setLoaded(true);
     };
 
-    // useEffect(() => {
-    //     // Add an event listener to listen for messages from the parent window
-    //     window.addEventListener("message", event => {
-    //         // Check that the message origin is trusted (for security)
-    //         if (event.origin !== window.origin) {
-    //             console.log("Error");
-    //             return;
-    //         }
+    const loadDataFromLocalStorage = () => {
 
-    //         // Access the data sent from the parent window
-    //         console.log(event);
-    //         const data = event.data;
-    //         setSelectedTypeOfService(data);
-    //         // setSelectedSpecialization(data);
-    //         // Handle the received data as needed
-    //         console.log("Received data in the child window:", data);
-    //     });
+        const selectedTypeOfServiceTags = localStorage.getItem("selectedTypeOfService");
+        const selectedSpecializationTags = localStorage.getItem("selectedSpecialization");
+        if (selectedTypeOfServiceTags) {
+            const typeOfService = JSON.parse(selectedTypeOfServiceTags);
+            setSelectedTypeOfService(typeOfService);
+            console.log("tos", typeOfService, selectedTypeOfService);
+            localStorage.removeItem("selectedTypeOfService");
+        }
 
-    //     // Clean up the event listener when the component unmounts
-    //     return () => {
-    //         window.removeEventListener("message", null);
-    //     };
-    // }, []);
+        if (selectedSpecializationTags) {
+            const specialization = JSON.parse(selectedSpecializationTags);
+            setSelectedSpecialization(specialization);
+            console.log("spec", specialization, selectedSpecialization);
+            localStorage.removeItem("selectedSpecialization");
+        }
 
-    // useEffect(() => {
-    //     fetchLawyerData();
-    // }, []);
+        if (selectedTypeOfServiceTags || selectedSpecializationTags) return true;
+        else return false;
+    };
+
+    const [shouldRunEffect, setShouldRunEffect] = useState(false);
+
+    // Check your condition and update shouldRunEffect accordingly
+    useEffect(() => {
+        const conditionMet = loadDataFromLocalStorage();
+        if (conditionMet) {
+            // Set shouldRunEffect to true when the condition is met
+            console.log("setting flag true");
+            setShouldRunEffect(true);
+        }
+        else fetchLawyerData();
+    }, []);
 
     useEffect(() => {
-        // Check if there are selected tags in local storage
-        const storedTags = localStorage.getItem("selectedTags");
-        if (storedTags) {
-            const parsedTags = JSON.parse(storedTags);
-            setSelectedTypeOfService(parsedTags);
-            console.log("RECIEVEDDDD", parsedTags, selectedTypeOfService);
-            // Clear the stored data to avoid using it again
-            localStorage.removeItem("selectedTags");
+
+        if (shouldRunEffect) {
+            console.log("spec", selectedSpecialization);
+            console.log("tos", selectedTypeOfService);
+
+            if (selectedTypeOfService.length > 0 || selectedSpecialization.length > 0) {
+                console.log("calling search please");
+                handleSearch();
+            }
+            setLoaded(true);
+            setShouldRunEffect(false);
         }
-    
-        fetchLawyerData();
-    }, []);
-    
+    }, [shouldRunEffect]);
+
+
 
     const handleSearch = () => {
         console.log(selectedTypeOfService);
